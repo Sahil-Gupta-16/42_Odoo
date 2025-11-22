@@ -18,17 +18,19 @@ import {
     Eye
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import dummyData from "@/data/dummy.json";
 import { useUIStore } from "@/store/useUIStore";
+import { useInventoryStore } from "@/store/useInventoryStore";
+import dummyData from "@/data/dummy.json";
 
 export default function ProductsPage() {
     const router = useRouter();
     const { addNotification } = useUIStore();
+    const { products, deleteProduct } = useInventoryStore();
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [viewMode, setViewMode] = useState<"grid" | "list">("list");
 
-    const filteredProducts = dummyData.products.filter(product => {
+    const filteredProducts = products.filter(product => {
         const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
             product.sku.toLowerCase().includes(searchQuery.toLowerCase());
         const matchesCategory = selectedCategory === "All" || product.category === selectedCategory;
@@ -46,7 +48,7 @@ export default function ProductsPage() {
 
     const handleDelete = (productId: string, productName: string) => {
         if (confirm(`Are you sure you want to delete "${productName}"? This action cannot be undone.`)) {
-            // In a real app, you would call an API here
+            deleteProduct(productId);
             addNotification("success", `Product "${productName}" deleted successfully`);
             // For now, we can't actually delete from the JSON file, but we simulate the action
         }
@@ -168,7 +170,7 @@ export default function ProductsPage() {
                                         </span>
                                     </td>
                                     <td className="px-6 py-4 text-right">
-                                        <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <div className="flex items-center justify-end gap-2">
                                             <button
                                                 onClick={() => router.push(`/products/${product.id}`)}
                                                 className="p-2 rounded-lg hover:bg-accent/10 text-text-secondary hover:text-accent transition-colors"

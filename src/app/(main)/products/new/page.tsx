@@ -13,10 +13,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { ArrowLeft, Package, Save, X, Sparkles } from 'lucide-react';
+import { useInventoryStore } from '@/store/useInventoryStore';
+import { useUIStore } from '@/store/useUIStore';
 import dummyData from '@/data/dummy.json';
 
 export default function AddProductPage() {
   const router = useRouter();
+  const { addProduct } = useInventoryStore();
+  const { addNotification } = useUIStore();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -108,12 +112,37 @@ export default function AddProductPage() {
 
     setIsLoading(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      console.log('Adding product:', formData);
-      alert(`Product "${formData.name}" added successfully!`);
-      router.push('/products');
-    }, 1000);
+    // Create the product object
+    const newProduct = {
+      id: `prod${Date.now()}`,
+      name: formData.name,
+      sku: formData.sku,
+      category: formData.category,
+      categoryId: formData.category.toLowerCase().replace(/\s+/g, '-'),
+      warehouse: formData.warehouse,
+      warehouseId: formData.warehouse.toLowerCase().replace(/\s+/g, '-'),
+      location: formData.location,
+      stock: formData.stock,
+      minStockLevel: formData.minStockLevel,
+      maxStockLevel: formData.maxStockLevel,
+      unit: formData.unit,
+      unitPrice: formData.unitPrice,
+      totalValue: formData.stock * formData.unitPrice,
+      supplier: formData.supplier,
+      supplierContact: '',
+      lastRestocked: new Date().toISOString().split('T')[0],
+      status: (formData.stock === 0 ? 'out-of-stock' :
+        formData.stock <= formData.minStockLevel ? 'low-stock' :
+          'in-stock') as 'in-stock' | 'low-stock' | 'out-of-stock',
+      description: '',
+    };
+
+    // Add to store
+    addProduct(newProduct);
+    addNotification('success', `Product "${formData.name}" added successfully!`);
+
+    setIsLoading(false);
+    router.push('/products');
   };
 
   const handleCancel = () => {

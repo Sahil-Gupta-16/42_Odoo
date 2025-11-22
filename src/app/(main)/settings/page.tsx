@@ -19,9 +19,12 @@ import {
   Edit,
   ExternalLink,
   ArrowRight,
+  Eye,
+  Search,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useUIStore } from "@/store/useUIStore";
+import { useInventoryStore } from "@/store/useInventoryStore";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import dummyData from "@/data/dummy.json";
@@ -37,8 +40,10 @@ export default function SettingsPage() {
     setRollingTextSpeed,
     addNotification,
   } = useUIStore();
+  const { warehouses, deleteWarehouse } = useInventoryStore();
   const [isSaving, setIsSaving] = useState(false);
-  const [activeTab, setActiveTab] = useState("Appearance");
+  const [activeTab, setActiveTab] = useState("Notifications");
+  const [warehouseSearch, setWarehouseSearch] = useState("");
 
   const handleSave = () => {
     setIsSaving(true);
@@ -49,124 +54,6 @@ export default function SettingsPage() {
   };
 
   const tabs = [
-    {
-      label: "Appearance",
-      icon: <Monitor className="w-4 h-4" />,
-      content: (
-        <div className="space-y-6">
-          <div className="glass-effect rounded-lg p-6 border border-border dark:border-border">
-            <div className="flex items-center gap-3 mb-4">
-              {theme === "light" ? (
-                <Sun className="w-6 h-6 text-accent" />
-              ) : (
-                <Moon className="w-6 h-6 text-accent" />
-              )}
-              <h3 className="text-lg font-semibold text-primary dark:text-primary">
-                Theme
-              </h3>
-            </div>
-
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium text-primary dark:text-primary">
-                    Color Mode
-                  </p>
-                  <p className="text-sm text-text-secondary dark:text-text-secondary">
-                    Choose your preferred color scheme
-                  </p>
-                </div>
-                <Button onClick={toggleTheme}>
-                  {theme === "light" ? (
-                    <>
-                      <Moon className="w-4 h-4" />
-                      Switch to Dark
-                    </>
-                  ) : (
-                    <>
-                      <Sun className="w-4 h-4" />
-                      Switch to Light
-                    </>
-                  )}
-                </Button>
-              </div>
-
-              <div className="pt-4 border-t border-border dark:border-border">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-medium text-primary dark:text-primary">
-                      Animations
-                    </p>
-                    <p className="text-sm text-text-secondary dark:text-text-secondary">
-                      Enable smooth transitions and effects
-                    </p>
-                  </div>
-                  <label className="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={preferences.animationsEnabled}
-                      onChange={(e) =>
-                        setPreference("animationsEnabled", e.target.checked)
-                      }
-                      className="sr-only peer"
-                    />
-                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-accent/30 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-accent"></div>
-                  </label>
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-border dark:border-border">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-medium text-primary dark:text-primary">
-                      Compact Mode
-                    </p>
-                    <p className="text-sm text-text-secondary dark:text-text-secondary">
-                      Reduce spacing for more content
-                    </p>
-                  </div>
-                  <label className="relative inline-flex items-center cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={preferences.compactMode}
-                      onChange={(e) =>
-                        setPreference("compactMode", e.target.checked)
-                      }
-                      className="sr-only peer"
-                    />
-                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-accent/30 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-accent"></div>
-                  </label>
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-border dark:border-border">
-                <div>
-                  <p className="font-medium text-primary dark:text-primary mb-2">
-                    Rolling Text Speed
-                  </p>
-                  <p className="text-sm text-text-secondary dark:text-text-secondary mb-4">
-                    Adjust the speed of scrolling notifications
-                  </p>
-                  <div className="flex items-center gap-4">
-                    <input
-                      type="range"
-                      min="10"
-                      max="100"
-                      value={rollingTextSpeed}
-                      onChange={(e) =>
-                        setRollingTextSpeed(Number(e.target.value))
-                      }
-                      className="flex-1"
-                    />
-                    <Badge>{rollingTextSpeed}</Badge>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      ),
-    },
     {
       label: "Notifications",
       icon: <Bell className="w-4 h-4" />,
@@ -237,96 +124,125 @@ export default function SettingsPage() {
       label: "Warehouses",
       icon: <Warehouse className="w-4 h-4" />,
       content: (
-        <div className="space-y-4">
-          <div className="flex justify-between items-center mb-4">
+        <div className="space-y-6">
+          {/* Header */}
+          <div className="flex justify-between items-center">
             <div>
               <h3 className="text-lg font-semibold text-primary dark:text-primary">
                 Warehouse Management
               </h3>
               <p className="text-sm text-text-secondary dark:text-text-secondary">
-                Quick overview of your warehouses • Click to manage
+                Manage your warehouse locations
               </p>
             </div>
-            <div className="flex gap-2">
-              <Button
-                variant="ghost"
-                onClick={() => router.push("/dashboard/warehouses")}
-              >
-                <ExternalLink className="w-4 h-4" />
-                View All
-              </Button>
-              <Button onClick={() => router.push("/dashboard/warehouses/new")}>
-                <Plus className="w-4 h-4" />
-                Add Warehouse
-              </Button>
-            </div>
+            <Button onClick={() => router.push("/warehouse/new")}>
+              <Plus className="w-4 h-4" />
+              Add Warehouse
+            </Button>
           </div>
 
-          <div className="space-y-3">
-            {dummyData.warehouses?.map((warehouse: any) => (
-              <div
-                key={warehouse.id}
-                onClick={() =>
-                  router.push(`/dashboard/warehouses/${warehouse.id}`)
-                }
-                className="glass-effect rounded-lg p-5 border border-border dark:border-border hover:border-accent dark:hover:border-accent transition-all cursor-pointer group"
-              >
-                <div className="flex items-start justify-between">
-                  <div className="flex items-start gap-4 flex-1">
-                    <div className="p-3 rounded-lg bg-accent/10 group-hover:bg-accent/20 transition-colors">
-                      <Warehouse className="w-6 h-6 text-accent" />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h4 className="font-semibold text-primary dark:text-primary group-hover:text-accent transition-colors">
-                          {warehouse.name}
-                        </h4>
-                        <ArrowRight className="w-4 h-4 text-text-tertiary opacity-0 group-hover:opacity-100 transition-opacity" />
+          {/* Search */}
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-tertiary" />
+            <input
+              type="text"
+              placeholder="Search warehouses..."
+              value={warehouseSearch}
+              onChange={(e) => setWarehouseSearch(e.target.value)}
+              className="w-full pl-10 pr-4 py-2 rounded-lg border border-border bg-background focus:ring-2 focus:ring-accent/20 focus:border-accent transition-all outline-none"
+            />
+          </div>
+
+          {/* Warehouses Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {warehouses
+              .filter(warehouse =>
+                warehouse.name.toLowerCase().includes(warehouseSearch.toLowerCase()) ||
+                warehouse.location.toLowerCase().includes(warehouseSearch.toLowerCase())
+              )
+              .map((warehouse) => (
+                <div key={warehouse.id} className="glass-effect rounded-xl border border-border p-6 hover:border-accent/50 transition-all group">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center text-accent group-hover:bg-accent/20 transition-colors">
+                        <Warehouse className="w-6 h-6" />
                       </div>
-                      <div className="flex items-center gap-2 text-sm text-text-secondary dark:text-text-secondary mb-2">
-                        <MapPin className="w-4 h-4" />
-                        <span>{warehouse.location}</span>
-                      </div>
-                      <div className="flex items-center gap-4 text-sm">
-                        <Badge
-                          variant={
-                            warehouse.status === "active"
-                              ? "success"
-                              : "default"
-                          }
-                        >
-                          {warehouse.status}
-                        </Badge>
-                        <span className="text-text-tertiary dark:text-text-tertiary">
-                          {warehouse.capacity || "N/A"} capacity
-                        </span>
+                      <div>
+                        <h3 className="font-semibold text-primary">{warehouse.name}</h3>
+                        <p className="text-xs text-text-tertiary capitalize">{warehouse.status}</p>
                       </div>
                     </div>
                   </div>
-                  <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+
+                  <div className="space-y-2 mb-4">
+                    <div className="text-sm">
+                      <span className="text-text-secondary">Location:</span>
+                      <span className="ml-2 text-primary">{warehouse.location}</span>
+                    </div>
+                    <div className="text-sm">
+                      <span className="text-text-secondary">Capacity:</span>
+                      <span className="ml-2 text-primary">{warehouse.capacity} units</span>
+                    </div>
+                    <div className="text-sm">
+                      <span className="text-text-secondary">Current Stock:</span>
+                      <span className="ml-2 text-primary">{warehouse.currentStock} units</span>
+                    </div>
+                  </div>
+
+                  {/* Utilization Bar */}
+                  <div className="mb-4">
+                    <div className="flex items-center justify-between text-xs text-text-secondary mb-1">
+                      <span>Utilization</span>
+                      <span className="font-medium text-primary">{warehouse.utilizationPercent}%</span>
+                    </div>
+                    <div className="w-full h-2 bg-background-secondary rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-accent rounded-full transition-all"
+                        style={{ width: `${warehouse.utilizationPercent}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Actions */}
+                  <div className="flex items-center justify-end gap-2 pt-4 border-t border-border">
                     <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        router.push(
-                          `/dashboard/warehouses/${warehouse.id}/edit`
-                        );
-                      }}
-                      className="p-2 rounded-lg hover:bg-accent/10 transition-colors"
+                      onClick={() => router.push(`/warehouse/${warehouse.id}`)}
+                      className="p-2 rounded-lg hover:bg-accent/10 text-text-secondary hover:text-accent transition-colors"
+                      title="View"
                     >
-                      <Edit className="w-4 h-4 text-accent" />
+                      <Eye className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => router.push(`/warehouse/${warehouse.id}/edit`)}
+                      className="p-2 rounded-lg hover:bg-accent/10 text-text-secondary hover:text-accent transition-colors"
+                      title="Edit"
+                    >
+                      <Edit className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (confirm(`Are you sure you want to delete "${warehouse.name}"?`)) {
+                          deleteWarehouse(warehouse.id);
+                          addNotification('success', `Warehouse "${warehouse.name}" deleted successfully`);
+                        }
+                      }}
+                      className="p-2 rounded-lg hover:bg-error/10 text-text-secondary hover:text-error transition-colors"
+                      title="Delete"
+                    >
+                      <Trash2 className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
 
-          {dummyData.warehouses && dummyData.warehouses.length > 0 && (
+          {/* Stats Summary */}
+          {warehouses && warehouses.length > 0 && (
             <div className="glass-effect rounded-lg p-4 border border-border dark:border-border">
               <div className="grid grid-cols-3 gap-4 text-center">
                 <div>
                   <p className="text-2xl font-bold text-accent">
-                    {dummyData.warehouses.length}
+                    {warehouses.length}
                   </p>
                   <p className="text-xs text-text-secondary dark:text-text-secondary">
                     Total Warehouses
@@ -335,7 +251,7 @@ export default function SettingsPage() {
                 <div>
                   <p className="text-2xl font-bold text-success">
                     {
-                      dummyData.warehouses.filter(
+                      warehouses.filter(
                         (w: any) => w.status === "active"
                       ).length
                     }
@@ -346,9 +262,9 @@ export default function SettingsPage() {
                 </div>
                 <div>
                   <p className="text-2xl font-bold text-text-primary dark:text-text-primary">
-                    {dummyData.warehouses.reduce(
+                    {warehouses.reduce(
                       (sum: number, w: any) =>
-                        sum + (parseInt(w.capacity) || 0),
+                        sum + (parseInt(w.capacity as any) || 0),
                       0
                     )}
                   </p>
@@ -359,106 +275,22 @@ export default function SettingsPage() {
               </div>
             </div>
           )}
-        </div>
-      ),
-    },
-    {
-      label: "Security",
-      icon: <Lock className="w-4 h-4" />,
-      content: (
-        <div className="space-y-4">
-          <div className="glass-effect rounded-lg p-6 border border-border dark:border-border">
-            <div className="flex items-center gap-3 mb-6">
-              <Lock className="w-6 h-6 text-accent" />
-              <h3 className="text-lg font-semibold text-primary dark:text-primary">
-                Security Settings
-              </h3>
-            </div>
 
-            <div className="space-y-4">
-              <Button variant="ghost" className="w-full justify-start">
-                <Lock className="w-4 h-4" />
-                Change Password
-              </Button>
-
-              <Button variant="ghost" className="w-full justify-start">
-                <User className="w-4 h-4" />
-                Update Profile
-              </Button>
-            </div>
-          </div>
-
-          <div className="glass-effect rounded-lg p-6 border border-error/20 dark:border-error/10 bg-error/5 dark:bg-error/5">
-            <h4 className="font-semibold text-error mb-2">Danger Zone</h4>
-            <p className="text-sm text-text-secondary dark:text-text-secondary mb-4">
-              Irreversible actions that affect your account
-            </p>
-            <Button variant="destructive">
-              <Trash2 className="w-4 h-4" />
-              Delete Account
-            </Button>
-          </div>
-        </div>
-      ),
-    },
-    {
-      label: "Data",
-      icon: <Download className="w-4 h-4" />,
-      content: (
-        <div className="glass-effect rounded-lg p-6 border border-border dark:border-border">
-          <div className="flex items-center gap-3 mb-6">
-            <Download className="w-6 h-6 text-accent" />
-            <h3 className="text-lg font-semibold text-primary dark:text-primary">
-              Data Management
-            </h3>
-          </div>
-
-          <div className="space-y-4">
-            <div>
-              <p className="font-medium text-primary dark:text-primary mb-2">
-                Export Data
-              </p>
-              <p className="text-sm text-text-secondary dark:text-text-secondary mb-4">
-                Download your inventory data in various formats
-              </p>
-              <div className="flex gap-2">
-                <Button variant="ghost">
-                  <Download className="w-4 h-4" />
-                  Export as CSV
-                </Button>
-                <Button variant="ghost">
-                  <Download className="w-4 h-4" />
-                  Export as JSON
-                </Button>
+          {/* Empty State */}
+          {warehouses.filter(warehouse =>
+            warehouse.name.toLowerCase().includes(warehouseSearch.toLowerCase()) ||
+            warehouse.location.toLowerCase().includes(warehouseSearch.toLowerCase())
+          ).length === 0 && (
+              <div className="glass-effect rounded-xl border border-border p-12 text-center">
+                <div className="w-16 h-16 bg-background-secondary rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Search className="w-8 h-8 text-text-tertiary" />
+                </div>
+                <h3 className="text-lg font-medium text-primary mb-1">No warehouses found</h3>
+                <p className="text-text-secondary">
+                  Try adjusting your search or add a new warehouse.
+                </p>
               </div>
-            </div>
-
-            <div className="pt-4 border-t border-border dark:border-border">
-              <p className="font-medium text-primary dark:text-primary mb-2">
-                Import Data
-              </p>
-              <p className="text-sm text-text-secondary dark:text-text-secondary mb-4">
-                Import inventory data from external sources
-              </p>
-              <Button variant="ghost">
-                <Upload className="w-4 h-4" />
-                Import CSV/JSON
-              </Button>
-            </div>
-
-            <div className="pt-4 border-t border-border dark:border-border">
-              <p className="font-medium text-primary dark:text-primary mb-2">
-                Clear Cache
-              </p>
-              <p className="text-sm text-text-secondary dark:text-text-secondary mb-4">
-                Clear local storage and cached data
-              </p>
-              <Button variant="ghost">
-                <Trash2 className="w-4 h-4" />
-                Clear All Data
-              </Button>
-            </div>
-          </div>
+            )}
         </div>
       ),
     },

@@ -1,0 +1,9 @@
+{
+  "/(main)/operations/receipts/[id]/page": "app/(main)/operations/receipts/[id]/page.js",
+  "/(main)/operations/deliveries/page": "app/(main)/operations/deliveries/page.js",
+  "/(main)/dashboard/page": "app/(main)/dashboard/page.js",
+  "/(main)/operations/deliveries/[id]/page": "app/(main)/operations/deliveries/[id]/page.js",
+  "/(main)/operations/transfers/page": "app/(main)/operations/transfers/page.js",
+  "/(main)/history/page": "app/(main)/history/page.js",
+  "/(main)/settings/page": "app/(main)/settings/page.js"
+}

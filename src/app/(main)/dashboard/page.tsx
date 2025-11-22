@@ -207,7 +207,7 @@ export default function DashboardPage() {
                         ) : (
                             <button
                                 onClick={() => setIsEditMode(true)}
-                                className="flex items-center gap-2 px-3 py-2 text-sm border border-border rounded-lg hover:bg-sidebar-hover transition-colors"
+                                className="flex items-center gap-2 px-4 py-2 bg-primary text-text-inverse rounded-lg hover:bg-primary-light transition-colors text-sm font-medium shadow-sm"
                             >
                                 <Grid3x3 className="w-4 h-4" />
                                 <span className="hidden sm:inline">Customize Dashboard</span>
@@ -216,10 +216,7 @@ export default function DashboardPage() {
                     </div>
                 </div>
 
-                {/* Banner */}
-                <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-                    <RollingText messages={dummyData.rollingTextMessages} />
-                </motion.div>
+
 
                 {/* Edit Mode Widget Library */}
                 <AnimatePresence>
