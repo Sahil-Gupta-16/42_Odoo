@@ -335,3 +335,4 @@ For support, questions, or feedback:
 ## References
 
 [1] StockMaster Project Documentation and Feature Specification (2025). Hackathon Project - Inventory Management System with Real-time Dashboard and Offline Support.
+
