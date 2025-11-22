@@ -1,4 +1,7 @@
-/** Placeholder Next.js config for inventory-system */
-module.exports = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
-};
+  swcMinify: true,
+}
+
+module.exports = nextConfig

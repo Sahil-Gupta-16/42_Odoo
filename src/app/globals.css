@@ -1,0 +1,390 @@
+/* @import "tailwindcss"; */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* your custom css should come AFTER these */
+
+
+/* ============================================
+   CSS VARIABLES - LIGHT MODE (DEFAULT)
+   ============================================ */
+:root {
+  /* Primary Colors */
+  --primary: #222A35;
+  --primary-light: #3A4556;
+  --primary-dark: #1A2029;
+  
+  /* Secondary Colors */
+  --secondary: #ADB5BD;
+  --secondary-light: #CED4DA;
+  --secondary-dark: #6C757D;
+  
+  /* Accent Colors */
+  --accent: #30B8F2;
+  --accent-light: #5DCBF7;
+  --accent-dark: #1B96D1;
+  
+  /* Status Colors */
+  --success: #39D98A;
+  --warning: #FFBC42;
+  --error: #FF5F56;
+  --info: #5DA9E9;
+  
+  /* Background Colors */
+  --background: #FAFBFC;
+  --background-secondary: #F6F8FA;
+  --background-tertiary: #EEECEC;
+  
+  /* Surface Colors */
+  --surface: rgba(255, 255, 255, 0.95);
+  --surface-glass: rgba(255, 255, 255, 0.75);
+  --surface-elevated: #FFFFFF;
+  
+  /* Sidebar Colors */
+  --sidebar-bg: #F6F8FA;
+  --sidebar-hover: rgba(48, 184, 242, 0.08);
+  --sidebar-active: rgba(48, 184, 242, 0.12);
+  
+  /* Text Colors */
+  --text-primary: #222A35;
+  --text-secondary: #6C757D;
+  --text-tertiary: #ADB5BD;
+  --text-inverse: #FFFFFF;
+  
+  /* Border Colors */
+  --border: rgba(173, 181, 189, 0.2);
+  --border-light: rgba(173, 181, 189, 0.1);
+  --border-medium: rgba(173, 181, 189, 0.3);
+  
+  /* Shadows */
+  --shadow-soft: 0 2px 8px rgba(34, 42, 53, 0.06);
+  --shadow-medium: 0 4px 16px rgba(34, 42, 53, 0.08);
+  --shadow-large: 0 8px 24px rgba(34, 42, 53, 0.10);
+  --shadow-glow: 0 0 24px rgba(48, 184, 242, 0.25);
+}
+
+/* ============================================
+   CSS VARIABLES - DARK MODE
+   ============================================ */
+.dark {
+  /* Primary Colors */
+  --primary: #E8EAED;
+  --primary-light: #F8F9FA;
+  --primary-dark: #CED4DA;
+  
+  /* Secondary Colors */
+  --secondary: #6C757D;
+  --secondary-light: #ADB5BD;
+  --secondary-dark: #495057;
+  
+  /* Accent Colors */
+  --accent: #5DCBF7;
+  --accent-light: #8DDBF9;
+  --accent-dark: #30B8F2;
+  
+  /* Status Colors */
+  --success: #4AE99E;
+  --warning: #FFD666;
+  --error: #FF7B72;
+  --info: #79C0FF;
+  
+  /* Background Colors */
+  --background: #0D1117;
+  --background-secondary: #161B22;
+  --background-tertiary: #1C2128;
+  
+  /* Surface Colors */
+  --surface: rgba(22, 27, 34, 0.95);
+  --surface-glass: rgba(22, 27, 34, 0.75);
+  --surface-elevated: #1C2128;
+  
+  /* Sidebar Colors */
+  --sidebar-bg: #161B22;
+  --sidebar-hover: rgba(93, 203, 247, 0.12);
+  --sidebar-active: rgba(93, 203, 247, 0.18);
+  
+  /* Text Colors */
+  --text-primary: #E8EAED;
+  --text-secondary: #ADB5BD;
+  --text-tertiary: #6C757D;
+  --text-inverse: #1A1D23;
+  
+  /* Border Colors */
+  --border: rgba(173, 181, 189, 0.15);
+  --border-light: rgba(173, 181, 189, 0.08);
+  --border-medium: rgba(173, 181, 189, 0.25);
+  
+  /* Shadows */
+  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-large: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 24px rgba(93, 203, 247, 0.3);
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  background-color: var(--background);
+  color: var(--text-primary);
+  line-height: 1.5;
+  transition: background-color 340ms cubic-bezier(0.22, 1, 0.36, 1),
+              color 340ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================
+   TRANSITIONS
+   ============================================ */
+button, a, input, textarea, select, [role="button"] {
+  transition: all 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================
+   FOCUS STYLES
+   ============================================ */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ============================================
+   SCROLLBAR STYLES
+   ============================================ */
+/* Light Mode Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(173, 181, 189, 0.3);
+  border-radius: 4px;
+  transition: background 180ms;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(173, 181, 189, 0.5);
+}
+
+/* Dark Mode Scrollbar */
+.dark ::-webkit-scrollbar-track {
+  background: var(--background-tertiary);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(173, 181, 189, 0.2);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(173, 181, 189, 0.3);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.glass-effect {
+  background: var(--surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-soft);
+}
+
+.glass-border {
+  border: 1px solid var(--border-light);
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeIn {
+  from { 
+    opacity: 0; 
+  }
+  to { 
+    opacity: 1; 
+  }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from { 
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { 
+    background-position: -1000px 0; 
+  }
+  100% { 
+    background-position: 1000px 0; 
+  }
+}
+
+@keyframes spin {
+  from { 
+    transform: rotate(0deg); 
+  }
+  to { 
+    transform: rotate(360deg); 
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 1; 
+  }
+  50% { 
+    opacity: 0.5; 
+  }
+}
+
+/* Animation Classes */
+.animate-fadeIn {
+  animation: fadeIn 340ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.animate-slideUp {
+  animation: slideUp 340ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.animate-slideDown {
+  animation: slideDown 340ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Shimmer Effect */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(173, 181, 189, 0.1) 0%,
+    rgba(173, 181, 189, 0.2) 50%,
+    rgba(173, 181, 189, 0.1) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+.dark .shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(173, 181, 189, 0.05) 0%,
+    rgba(173, 181, 189, 0.1) 50%,
+    rgba(173, 181, 189, 0.05) 100%
+  );
+}
+
+/* ============================================
+   SELECTION STYLES
+   ============================================ */
+::selection {
+  background-color: var(--accent);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--accent);
+  color: white;
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* ============================================
+   RESPONSIVE HELPERS
+   ============================================ */
+.container-responsive {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container-responsive {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-responsive {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-responsive {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-responsive {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container-responsive {
+    max-width: 1536px;
+  }
+}

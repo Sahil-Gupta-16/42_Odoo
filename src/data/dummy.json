@@ -16,7 +16,11 @@
     "categories": "Categories",
     "lowStock": "Low Stock Alert",
     "outOfStock": "Out of Stock",
-    "logout": "Logout"
+    "logout": "Logout",
+    "welcome": "Welcome back",
+    "quickActions": "Quick Actions",
+    "recentActivity": "Recent Activity",
+    "stockAlerts": "Stock Alerts"
   },
   "users": [
     {
@@ -26,7 +30,9 @@
       "password": "admin123",
       "role": "admin",
       "warehouse": "Main Warehouse",
-      "avatar": "/avatars/admin.png"
+      "avatar": "/avatars/admin.png",
+      "phone": "+1 234 567 8900",
+      "department": "Operations"
     },
     {
       "id": "usr002",
@@ -34,7 +40,10 @@
       "email": "manager@stockmaster.com",
       "password": "manager123",
       "role": "manager",
-      "warehouse": "Main Warehouse"
+      "warehouse": "Main Warehouse",
+      "avatar": "/avatars/manager.png",
+      "phone": "+1 234 567 8901",
+      "department": "Inventory Management"
     },
     {
       "id": "usr003",
@@ -42,45 +51,68 @@
       "email": "staff@stockmaster.com",
       "password": "staff123",
       "role": "staff",
-      "warehouse": "Secondary Warehouse"
+      "warehouse": "Secondary Warehouse",
+      "avatar": "/avatars/staff.png",
+      "phone": "+1 234 567 8902",
+      "department": "Warehouse Operations"
     }
   ],
   "warehouses": [
     {
       "id": "wh001",
       "name": "Main Warehouse",
-      "location": "Building A, Floor 1",
+      "location": "Building A, Floor 1, Industrial Zone",
+      "address": "1234 Industrial Blvd, City, State 12345",
       "capacity": 5000,
       "currentStock": 3250,
-      "zones": ["A1", "A2", "A3", "B1", "B2"]
+      "utilizationPercent": 65,
+      "zones": ["A1", "A2", "A3", "B1", "B2", "B3"],
+      "manager": "Manager Jane",
+      "phone": "+1 234 567 8900",
+      "status": "active"
     },
     {
       "id": "wh002",
       "name": "Secondary Warehouse",
-      "location": "Building B, Floor 2",
+      "location": "Building B, Floor 2, Industrial Zone",
+      "address": "5678 Commerce Ave, City, State 12345",
       "capacity": 3000,
       "currentStock": 1800,
-      "zones": ["C1", "C2", "D1"]
+      "utilizationPercent": 60,
+      "zones": ["C1", "C2", "D1", "D2"],
+      "manager": "Staff John",
+      "phone": "+1 234 567 8901",
+      "status": "active"
     }
   ],
   "categories": [
     {
       "id": "cat001",
       "name": "Glass Products",
-      "description": "Tempered and regular glass sheets",
-      "productCount": 25
+      "description": "Tempered and regular glass sheets of various thicknesses",
+      "productCount": 25,
+      "icon": "glass"
     },
     {
       "id": "cat002",
       "name": "Hardware",
       "description": "Fasteners, brackets, and mounting hardware",
-      "productCount": 150
+      "productCount": 150,
+      "icon": "wrench"
     },
     {
       "id": "cat003",
       "name": "Tools",
-      "description": "Hand tools and power tools",
-      "productCount": 45
+      "description": "Hand tools and power tools for installation",
+      "productCount": 45,
+      "icon": "tool"
+    },
+    {
+      "id": "cat004",
+      "name": "Safety Equipment",
+      "description": "Personal protective equipment and safety gear",
+      "productCount": 30,
+      "icon": "shield"
     }
   ],
   "products": [
@@ -89,60 +121,105 @@
       "name": "12mm Tempered Glass",
       "sku": "TG-12MM-001",
       "category": "Glass Products",
+      "categoryId": "cat001",
       "warehouse": "Main Warehouse",
+      "warehouseId": "wh001",
       "location": "A1",
       "stock": 120,
       "minStockLevel": 20,
       "maxStockLevel": 200,
       "unit": "sheets",
       "unitPrice": 45.50,
+      "totalValue": 5460.00,
       "supplier": "GlassCo Ltd",
-      "lastRestocked": "2025-11-20"
+      "supplierContact": "+1 555 123 4567",
+      "lastRestocked": "2025-11-20",
+      "status": "in-stock",
+      "description": "High-quality tempered glass, suitable for windows and doors"
     },
     {
       "id": "prod002",
       "name": "8mm Clear Glass",
       "sku": "CG-8MM-002",
       "category": "Glass Products",
+      "categoryId": "cat001",
       "warehouse": "Main Warehouse",
+      "warehouseId": "wh001",
       "location": "A2",
       "stock": 15,
       "minStockLevel": 20,
       "maxStockLevel": 150,
       "unit": "sheets",
       "unitPrice": 28.00,
+      "totalValue": 420.00,
       "supplier": "GlassCo Ltd",
-      "lastRestocked": "2025-11-18"
+      "supplierContact": "+1 555 123 4567",
+      "lastRestocked": "2025-11-18",
+      "status": "low-stock",
+      "description": "Standard clear glass for general applications"
     },
     {
       "id": "prod003",
       "name": "Mounting Brackets",
       "sku": "HW-BRK-003",
       "category": "Hardware",
+      "categoryId": "cat002",
       "warehouse": "Secondary Warehouse",
+      "warehouseId": "wh002",
       "location": "C1",
       "stock": 0,
       "minStockLevel": 50,
       "maxStockLevel": 500,
       "unit": "pieces",
       "unitPrice": 2.50,
+      "totalValue": 0,
       "supplier": "Hardware Plus",
-      "lastRestocked": "2025-11-15"
+      "supplierContact": "+1 555 234 5678",
+      "lastRestocked": "2025-11-15",
+      "status": "out-of-stock",
+      "description": "Heavy-duty steel mounting brackets"
     },
     {
       "id": "prod004",
       "name": "Glass Cutter Pro",
       "sku": "TL-GC-004",
       "category": "Tools",
+      "categoryId": "cat003",
       "warehouse": "Main Warehouse",
+      "warehouseId": "wh001",
       "location": "B1",
       "stock": 35,
       "minStockLevel": 10,
       "maxStockLevel": 50,
       "unit": "pieces",
       "unitPrice": 125.00,
+      "totalValue": 4375.00,
       "supplier": "ToolMasters Inc",
-      "lastRestocked": "2025-11-22"
+      "supplierContact": "+1 555 345 6789",
+      "lastRestocked": "2025-11-22",
+      "status": "in-stock",
+      "description": "Professional-grade glass cutting tool with carbide wheel"
+    },
+    {
+      "id": "prod005",
+      "name": "Safety Goggles",
+      "sku": "SF-GOG-005",
+      "category": "Safety Equipment",
+      "categoryId": "cat004",
+      "warehouse": "Main Warehouse",
+      "warehouseId": "wh001",
+      "location": "B2",
+      "stock": 85,
+      "minStockLevel": 30,
+      "maxStockLevel": 100,
+      "unit": "pieces",
+      "unitPrice": 15.00,
+      "totalValue": 1275.00,
+      "supplier": "SafetyFirst Co",
+      "supplierContact": "+1 555 456 7890",
+      "lastRestocked": "2025-11-19",
+      "status": "in-stock",
+      "description": "Impact-resistant safety goggles with anti-fog coating"
     }
   ],
   "receipts": [
@@ -150,27 +227,73 @@
       "id": "rec001",
       "receiptNumber": "RCP-2025-001",
       "warehouse": "Main Warehouse",
+      "warehouseId": "wh001",
       "supplier": "GlassCo Ltd",
+      "supplierContact": "+1 555 123 4567",
       "date": "2025-11-22",
+      "expectedDate": "2025-11-22",
       "status": "completed",
       "items": [
-        { "productId": "prod001", "productName": "12mm Tempered Glass", "quantity": 50, "unitPrice": 45.50 }
+        { 
+          "productId": "prod001", 
+          "productName": "12mm Tempered Glass", 
+          "quantity": 50, 
+          "unitPrice": 45.50,
+          "totalPrice": 2275.00
+        }
       ],
       "totalValue": 2275.00,
-      "receivedBy": "usr002"
+      "receivedBy": "usr002",
+      "receivedByName": "Manager Jane",
+      "notes": "Delivery in good condition, all items inspected"
     },
     {
       "id": "rec002",
       "receiptNumber": "RCP-2025-002",
       "warehouse": "Main Warehouse",
+      "warehouseId": "wh001",
       "supplier": "GlassCo Ltd",
+      "supplierContact": "+1 555 123 4567",
       "date": "2025-11-20",
+      "expectedDate": "2025-11-25",
       "status": "pending",
       "items": [
-        { "productId": "prod002", "productName": "8mm Clear Glass", "quantity": 100, "unitPrice": 28.00 }
+        { 
+          "productId": "prod002", 
+          "productName": "8mm Clear Glass", 
+          "quantity": 100, 
+          "unitPrice": 28.00,
+          "totalPrice": 2800.00
+        }
       ],
       "totalValue": 2800.00,
-      "receivedBy": "usr002"
+      "receivedBy": "usr002",
+      "receivedByName": "Manager Jane",
+      "notes": "Awaiting delivery confirmation"
+    },
+    {
+      "id": "rec003",
+      "receiptNumber": "RCP-2025-003",
+      "warehouse": "Secondary Warehouse",
+      "warehouseId": "wh002",
+      "supplier": "Hardware Plus",
+      "supplierContact": "+1 555 234 5678",
+      "date": "2025-11-21",
+      "expectedDate": "2025-11-21",
+      "status": "completed",
+      "items": [
+        { 
+          "productId": "prod003", 
+          "productName": "Mounting Brackets", 
+          "quantity": 200, 
+          "unitPrice": 2.50,
+          "totalPrice": 500.00
+        }
+      ],
+      "totalValue": 500.00,
+      "receivedBy": "usr003",
+      "receivedByName": "Staff John",
+      "notes": "Partial delivery, remaining 100 units to arrive next week"
     }
   ],
   "deliveries": [
@@ -178,25 +301,53 @@
       "id": "del001",
       "deliveryNumber": "DEL-2025-001",
       "warehouse": "Main Warehouse",
+      "warehouseId": "wh001",
       "customer": "ABC Construction",
+      "customerContact": "+1 555 987 6543",
+      "deliveryAddress": "789 Construction Site Rd, City, State 12345",
       "date": "2025-11-21",
+      "scheduledDate": "2025-11-21",
       "status": "dispatched",
       "items": [
-        { "productId": "prod001", "productName": "12mm Tempered Glass", "quantity": 10 }
+        { 
+          "productId": "prod001", 
+          "productName": "12mm Tempered Glass", 
+          "quantity": 10,
+          "unitPrice": 45.50,
+          "totalPrice": 455.00
+        }
       ],
-      "deliveredBy": "usr003"
+      "totalValue": 455.00,
+      "deliveredBy": "usr003",
+      "deliveredByName": "Staff John",
+      "trackingNumber": "TRK-2025-001",
+      "notes": "Delivered on time, customer signature obtained"
     },
     {
       "id": "del002",
       "deliveryNumber": "DEL-2025-002",
       "warehouse": "Secondary Warehouse",
+      "warehouseId": "wh002",
       "customer": "XYZ Builders",
+      "customerContact": "+1 555 876 5432",
+      "deliveryAddress": "456 Builder Ave, City, State 12345",
       "date": "2025-11-22",
+      "scheduledDate": "2025-11-22",
       "status": "pending",
       "items": [
-        { "productId": "prod004", "productName": "Glass Cutter Pro", "quantity": 5 }
+        { 
+          "productId": "prod004", 
+          "productName": "Glass Cutter Pro", 
+          "quantity": 5,
+          "unitPrice": 125.00,
+          "totalPrice": 625.00
+        }
       ],
-      "deliveredBy": "usr003"
+      "totalValue": 625.00,
+      "deliveredBy": "usr003",
+      "deliveredByName": "Staff John",
+      "trackingNumber": "TRK-2025-002",
+      "notes": "Scheduled for afternoon delivery"
     }
   ],
   "stockMoves": [
@@ -205,7 +356,9 @@
       "moveNumber": "TRF-2025-001",
       "type": "transfer",
       "fromWarehouse": "Main Warehouse",
+      "fromWarehouseId": "wh001",
       "toWarehouse": "Secondary Warehouse",
+      "toWarehouseId": "wh002",
       "fromLocation": "A1",
       "toLocation": "C1",
       "product": "prod001",
@@ -213,21 +366,47 @@
       "quantity": 10,
       "date": "2025-11-20",
       "status": "completed",
-      "initiatedBy": "usr002"
+      "initiatedBy": "usr002",
+      "initiatedByName": "Manager Jane",
+      "reason": "Stock rebalancing between warehouses",
+      "notes": "Transfer completed successfully"
     },
     {
       "id": "move002",
       "moveNumber": "ADJ-2025-001",
       "type": "adjustment",
       "warehouse": "Main Warehouse",
+      "warehouseId": "wh001",
       "location": "A2",
       "product": "prod002",
       "productName": "8mm Clear Glass",
       "quantity": -5,
-      "reason": "Damaged goods",
       "date": "2025-11-19",
       "status": "completed",
-      "initiatedBy": "usr002"
+      "initiatedBy": "usr002",
+      "initiatedByName": "Manager Jane",
+      "reason": "Damaged goods",
+      "notes": "5 sheets found damaged during inspection, written off"
+    },
+    {
+      "id": "move003",
+      "moveNumber": "TRF-2025-002",
+      "type": "transfer",
+      "fromWarehouse": "Secondary Warehouse",
+      "fromWarehouseId": "wh002",
+      "toWarehouse": "Main Warehouse",
+      "toWarehouseId": "wh001",
+      "fromLocation": "C2",
+      "toLocation": "B1",
+      "product": "prod004",
+      "productName": "Glass Cutter Pro",
+      "quantity": 5,
+      "date": "2025-11-21",
+      "status": "pending",
+      "initiatedBy": "usr003",
+      "initiatedByName": "Staff John",
+      "reason": "Demand fulfillment",
+      "notes": "In transit, expected arrival tomorrow"
     }
   ],
   "kpi": {
@@ -237,12 +416,50 @@
     "pendingReceipts": 1,
     "pendingDeliveries": 1,
     "totalValue": 125000.00,
-    "warehouseUtilization": 65
+    "warehouseUtilization": 65,
+    "totalTransactions": 156,
+    "monthlyGrowth": 12.5
   },
   "rollingTextMessages": [
     "⚠️ Low stock alert: 8mm Clear Glass (15 sheets remaining)",
     "✅ Recent delivery: 50 sheets of 12mm Tempered Glass received",
     "🚚 Pending delivery to ABC Construction scheduled for today",
-    "📦 2 receipts awaiting validation"
+    "📦 2 receipts awaiting validation",
+    "⭐ Warehouse utilization at 65% - optimal level",
+    "🔄 Stock transfer in progress: Glass Cutter Pro"
+  ],
+  "quickActions": [
+    {
+      "id": "qa001",
+      "title": "Add Product",
+      "description": "Add new product to inventory",
+      "icon": "plus",
+      "link": "/dashboard/products/new",
+      "color": "accent"
+    },
+    {
+      "id": "qa002",
+      "title": "Create Receipt",
+      "description": "Record incoming stock",
+      "icon": "package",
+      "link": "/dashboard/operations/receipts/new",
+      "color": "success"
+    },
+    {
+      "id": "qa003",
+      "title": "New Delivery",
+      "description": "Schedule outgoing delivery",
+      "icon": "truck",
+      "link": "/dashboard/operations/deliveries/new",
+      "color": "info"
+    },
+    {
+      "id": "qa004",
+      "title": "Transfer Stock",
+      "description": "Move items between warehouses",
+      "icon": "transfer",
+      "link": "/dashboard/stock-moves/new",
+      "color": "warning"
+    }
   ]
 }
