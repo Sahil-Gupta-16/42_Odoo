@@ -11,116 +11,114 @@
    CSS VARIABLES - LIGHT MODE (DEFAULT)
    ============================================ */
 :root {
-  /* Primary Colors */
-  --primary: #222A35;
-  --primary-light: #3A4556;
-  --primary-dark: #1A2029;
-  
-  /* Secondary Colors */
-  --secondary: #ADB5BD;
-  --secondary-light: #CED4DA;
-  --secondary-dark: #6C757D;
-  
-  /* Accent Colors */
-  --accent: #30B8F2;
-  --accent-light: #5DCBF7;
-  --accent-dark: #1B96D1;
-  
-  /* Status Colors */
-  --success: #39D98A;
-  --warning: #FFBC42;
-  --error: #FF5F56;
-  --info: #5DA9E9;
-  
-  /* Background Colors */
-  --background: #FAFBFC;
-  --background-secondary: #F6F8FA;
-  --background-tertiary: #EEECEC;
-  
+  /* Primary Colors - ERPNext Strict Monochrome */
+  --primary: #171717;
+  /* Almost Black */
+  --primary-light: #404040;
+  --primary-dark: #000000;
+
+  /* Secondary Colors - Cool Grays */
+  --secondary: #737373;
+  --secondary-light: #A3A3A3;
+  --secondary-dark: #525252;
+
+  /* Accent Colors - Minimalist (Used VERY sparingly) */
+  --accent: #171717;
+  /* Black accent for a serious look */
+  --accent-light: #404040;
+  --accent-dark: #000000;
+
+  /* Status Colors - Desaturated/Professional */
+  --success: #10B981;
+  /* Standard Green */
+  --warning: #F59E0B;
+  /* Standard Amber */
+  --error: #EF4444;
+  /* Standard Red */
+  --info: #737373;
+  /* Gray for info to reduce blue noise */
+
+  /* Background Colors - Paper/Clean */
+  --background: #F4F5F7;
+  /* Frappe-like light gray background */
+  --background-secondary: #FFFFFF;
+  /* White cards */
+  --background-tertiary: #FAFAFA;
+
   /* Surface Colors */
-  --surface: rgba(255, 255, 255, 0.95);
-  --surface-glass: rgba(255, 255, 255, 0.75);
+  --surface: #FFFFFF;
+  --surface-glass: #FFFFFF;
   --surface-elevated: #FFFFFF;
-  
+
   /* Sidebar Colors */
-  --sidebar-bg: #F6F8FA;
-  --sidebar-hover: rgba(48, 184, 242, 0.08);
-  --sidebar-active: rgba(48, 184, 242, 0.12);
-  
+  --sidebar-bg: #FFFFFF;
+  --sidebar-hover: #F4F4F5;
+  /* Light Gray Hover */
+  --sidebar-active: #E4E4E7;
+  /* Darker Gray Active */
+
   /* Text Colors */
-  --text-primary: #222A35;
-  --text-secondary: #6C757D;
-  --text-tertiary: #ADB5BD;
+  --text-primary: #171717;
+  --text-secondary: #525252;
+  --text-tertiary: #A3A3A3;
   --text-inverse: #FFFFFF;
-  
+
   /* Border Colors */
-  --border: rgba(173, 181, 189, 0.2);
-  --border-light: rgba(173, 181, 189, 0.1);
-  --border-medium: rgba(173, 181, 189, 0.3);
-  
-  /* Shadows */
-  --shadow-soft: 0 2px 8px rgba(34, 42, 53, 0.06);
-  --shadow-medium: 0 4px 16px rgba(34, 42, 53, 0.08);
-  --shadow-large: 0 8px 24px rgba(34, 42, 53, 0.10);
-  --shadow-glow: 0 0 24px rgba(48, 184, 242, 0.25);
+  --border: #E4E4E7;
+  --border-light: #F4F4F5;
+  --border-medium: #D4D4D8;
+
+  /* Shadows - Frappe Style (Subtle) */
+  --shadow-soft: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+  --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  --shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+  --shadow-glow: none;
 }
 
-/* ============================================
-   CSS VARIABLES - DARK MODE
-   ============================================ */
+/* Dark Mode - Neutral Dark */
 .dark {
-  /* Primary Colors */
-  --primary: #E8EAED;
-  --primary-light: #F8F9FA;
-  --primary-dark: #CED4DA;
-  
-  /* Secondary Colors */
-  --secondary: #6C757D;
-  --secondary-light: #ADB5BD;
-  --secondary-dark: #495057;
-  
-  /* Accent Colors */
-  --accent: #5DCBF7;
-  --accent-light: #8DDBF9;
-  --accent-dark: #30B8F2;
-  
-  /* Status Colors */
-  --success: #4AE99E;
-  --warning: #FFD666;
-  --error: #FF7B72;
-  --info: #79C0FF;
-  
-  /* Background Colors */
-  --background: #0D1117;
-  --background-secondary: #161B22;
-  --background-tertiary: #1C2128;
-  
-  /* Surface Colors */
-  --surface: rgba(22, 27, 34, 0.95);
-  --surface-glass: rgba(22, 27, 34, 0.75);
-  --surface-elevated: #1C2128;
-  
-  /* Sidebar Colors */
-  --sidebar-bg: #161B22;
-  --sidebar-hover: rgba(93, 203, 247, 0.12);
-  --sidebar-active: rgba(93, 203, 247, 0.18);
-  
-  /* Text Colors */
-  --text-primary: #E8EAED;
-  --text-secondary: #ADB5BD;
-  --text-tertiary: #6C757D;
-  --text-inverse: #1A1D23;
-  
-  /* Border Colors */
-  --border: rgba(173, 181, 189, 0.15);
-  --border-light: rgba(173, 181, 189, 0.08);
-  --border-medium: rgba(173, 181, 189, 0.25);
-  
-  /* Shadows */
-  --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.3);
-  --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.4);
-  --shadow-large: 0 8px 24px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 24px rgba(93, 203, 247, 0.3);
+  --primary: #FAFAFA;
+  --primary-light: #F4F4F5;
+  --primary-dark: #E4E4E7;
+
+  --secondary: #A1A1AA;
+  --secondary-light: #D4D4D8;
+  --secondary-dark: #71717A;
+
+  --accent: #FAFAFA;
+  --accent-light: #F4F4F5;
+  --accent-dark: #FFFFFF;
+
+  --success: #34D399;
+  --warning: #FBBF24;
+  --error: #F87171;
+  --info: #A1A1AA;
+
+  --background: #09090B;
+  --background-secondary: #18181B;
+  --background-tertiary: #27272A;
+
+  --surface: #18181B;
+  --surface-glass: #18181B;
+  --surface-elevated: #27272A;
+
+  --sidebar-bg: #09090B;
+  --sidebar-hover: #27272A;
+  --sidebar-active: #3F3F46;
+
+  --text-primary: #FAFAFA;
+  --text-secondary: #A1A1AA;
+  --text-tertiary: #71717A;
+  --text-inverse: #09090B;
+
+  --border: #27272A;
+  --border-light: #18181B;
+  --border-medium: #3F3F46;
+
+  --shadow-soft: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+  --shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.6);
+  --shadow-large: 0 10px 15px -3px rgba(0, 0, 0, 0.7);
+  --shadow-glow: none;
 }
 
 /* ============================================
@@ -144,13 +142,18 @@ body {
   color: var(--text-primary);
   line-height: 1.5;
   transition: background-color 340ms cubic-bezier(0.22, 1, 0.36, 1),
-              color 340ms cubic-bezier(0.22, 1, 0.36, 1);
+    color 340ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* ============================================
    TRANSITIONS
    ============================================ */
-button, a, input, textarea, select, [role="button"] {
+button,
+a,
+input,
+textarea,
+select,
+[role="button"] {
   transition: all 180ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -222,60 +225,68 @@ select:focus-visible {
    ANIMATIONS
    ============================================ */
 @keyframes fadeIn {
-  from { 
-    opacity: 0; 
+  from {
+    opacity: 0;
   }
-  to { 
-    opacity: 1; 
+
+  to {
+    opacity: 1;
   }
 }
 
 @keyframes slideUp {
-  from { 
+  from {
     opacity: 0;
     transform: translateY(20px);
   }
-  to { 
+
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
 @keyframes slideDown {
-  from { 
+  from {
     opacity: 0;
     transform: translateY(-20px);
   }
-  to { 
+
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
 @keyframes shimmer {
-  0% { 
-    background-position: -1000px 0; 
+  0% {
+    background-position: -1000px 0;
   }
-  100% { 
-    background-position: 1000px 0; 
+
+  100% {
+    background-position: 1000px 0;
   }
 }
 
 @keyframes spin {
-  from { 
-    transform: rotate(0deg); 
+  from {
+    transform: rotate(0deg);
   }
-  to { 
-    transform: rotate(360deg); 
+
+  to {
+    transform: rotate(360deg);
   }
 }
 
 @keyframes pulse {
-  0%, 100% { 
-    opacity: 1; 
+
+  0%,
+  100% {
+    opacity: 1;
   }
-  50% { 
-    opacity: 0.5; 
+
+  50% {
+    opacity: 0.5;
   }
 }
 
@@ -302,23 +313,19 @@ select:focus-visible {
 
 /* Shimmer Effect */
 .shimmer {
-  background: linear-gradient(
-    90deg,
-    rgba(173, 181, 189, 0.1) 0%,
-    rgba(173, 181, 189, 0.2) 50%,
-    rgba(173, 181, 189, 0.1) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(173, 181, 189, 0.1) 0%,
+      rgba(173, 181, 189, 0.2) 50%,
+      rgba(173, 181, 189, 0.1) 100%);
   background-size: 1000px 100%;
   animation: shimmer 2s infinite linear;
 }
 
 .dark .shimmer {
-  background: linear-gradient(
-    90deg,
-    rgba(173, 181, 189, 0.05) 0%,
-    rgba(173, 181, 189, 0.1) 50%,
-    rgba(173, 181, 189, 0.05) 100%
-  );
+  background: linear-gradient(90deg,
+      rgba(173, 181, 189, 0.05) 0%,
+      rgba(173, 181, 189, 0.1) 50%,
+      rgba(173, 181, 189, 0.05) 100%);
 }
 
 /* ============================================
@@ -342,7 +349,7 @@ select:focus-visible {
     background: white;
     color: black;
   }
-  
+
   .no-print {
     display: none !important;
   }
