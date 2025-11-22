@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
-import { motion, useAnimationFrame } from 'framer-motion';
+import { useRef } from 'react';
+import { useAnimationFrame } from 'framer-motion';
 import { useUIStore } from '@/store/useUIStore';
 
 interface RollingTextProps {
@@ -16,20 +16,29 @@ export default function RollingText({ messages }: RollingTextProps) {
   useAnimationFrame(() => {
     if (scrollRef.current) {
       xPos.current -= rollingTextSpeed / 60; // 60fps
-      if (Math.abs(xPos.current) >= scrollRef.current.scrollWidth / 2) {
+      const scrollWidth = scrollRef.current.scrollWidth;
+      
+      // Reset position when we've scrolled halfway through the duplicated content
+      if (Math.abs(xPos.current) >= scrollWidth / 2) {
         xPos.current = 0;
       }
+      
       scrollRef.current.style.transform = `translateX(${xPos.current}px)`;
     }
   });
 
   return (
     <div className="glass-effect rounded-lg p-4 border border-border dark:border-border overflow-hidden">
-      <div ref={scrollRef} className="flex gap-8 whitespace-nowrap">
+      <div 
+        ref={scrollRef} 
+        className="flex gap-8 whitespace-nowrap"
+        style={{ willChange: 'transform' }}
+      >
+        {/* Duplicate messages for seamless loop */}
         {[...messages, ...messages].map((message, index) => (
           <span
             key={index}
-            className="text-text-primary dark:text-text-primary font-medium"
+            className="text-sm md:text-base text-text-primary dark:text-text-primary font-medium"
           >
             {message}
           </span>

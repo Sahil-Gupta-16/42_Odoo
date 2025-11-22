@@ -1,13 +1,8 @@
 {
   "/(auth)/login/page": "app/(auth)/login/page.js",
+  "/(auth)/signup/page": "app/(auth)/signup/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
   "/dashboard/page": "app/dashboard/page.js",
-  "/dashboard/warehouses/page": "app/dashboard/warehouses/page.js",
-  "/dashboard/settings/page": "app/dashboard/settings/page.js",
-  "/dashboard/profile/page": "app/dashboard/profile/page.js",
-  "/dashboard/products/page": "app/dashboard/products/page.js",
   "/dashboard/operations/receipts/page": "app/dashboard/operations/receipts/page.js",
-  "/dashboard/operations/deliveries/page": "app/dashboard/operations/deliveries/page.js",
-  "/dashboard/stock-moves/page": "app/dashboard/stock-moves/page.js",
-  "/dashboard/history/page": "app/dashboard/history/page.js",
-  "/dashboard/products/new/page": "app/dashboard/products/new/page.js"
+  "/dashboard/history/page": "app/dashboard/history/page.js"
 }

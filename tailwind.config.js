@@ -75,21 +75,22 @@ module.exports = {
         glow: 'var(--shadow-glow)',
       },
       borderRadius: {
-        sm: '6px',
-        md: '12px',
-        lg: '16px',
-        xl: '20px',
-        '2xl': '24px',
+        sm: '0.25rem',    // 4px
+        md: '0.375rem',   // 6px
+        lg: '0.5rem',     // 8px
+        xl: '0.75rem',    // 12px
+        '2xl': '1rem',    // 16px
+        '3xl': '1.5rem',  // 24px
       },
       transitionDuration: {
         'instant': '100ms',
-        'fast': '180ms',
-        'normal': '340ms',
-        'slow': '600ms',
-        'slower': '900ms',
+        'fast': '150ms',
+        'normal': '200ms',
+        'slow': '300ms',
+        'slower': '500ms',
       },
       transitionTimingFunction: {
-        'smooth': 'cubic-bezier(0.22, 1, 0.36, 1)',
+        'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)',
         'spring': 'cubic-bezier(0.16, 1, 0.3, 1)',
       },
       zIndex: {
@@ -98,6 +99,58 @@ module.exports = {
         'modal': '1030',
         'popover': '1040',
         'tooltip': '1050',
+      },
+      // Animation configurations
+      animation: {
+        'blob': 'blob 7s infinite',
+        'blob-slow': 'blob 10s infinite',
+        'blob-fast': 'blob 5s infinite',
+        'float': 'float 6s ease-in-out infinite',
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'spin-slow': 'spin 3s linear infinite',
+        'wiggle': 'wiggle 1s ease-in-out infinite',
+      },
+      // Keyframes for animations
+      keyframes: {
+        blob: {
+          '0%': {
+            transform: 'translate(0px, 0px) scale(1)',
+          },
+          '33%': {
+            transform: 'translate(30px, -50px) scale(1.1)',
+          },
+          '66%': {
+            transform: 'translate(-20px, 20px) scale(0.9)',
+          },
+          '100%': {
+            transform: 'translate(0px, 0px) scale(1)',
+          },
+        },
+        float: {
+          '0%, 100%': {
+            transform: 'translateY(0px)',
+          },
+          '50%': {
+            transform: 'translateY(-20px)',
+          },
+        },
+        wiggle: {
+          '0%, 100%': {
+            transform: 'rotate(-3deg)',
+          },
+          '50%': {
+            transform: 'rotate(3deg)',
+          },
+        },
+      },
+      // Backdrop blur
+      backdropBlur: {
+        xs: '2px',
+      },
+      // Additional utilities
+      scale: {
+        '102': '1.02',
+        '103': '1.03',
       },
     },
   },

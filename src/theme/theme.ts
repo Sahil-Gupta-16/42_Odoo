@@ -1,88 +1,95 @@
-// src/theme/theme.ts
 /**
  * Central theme configuration for StockMaster IMS
- * Controls colors, spacing, shadows, animations, and all visual design tokens
+ * ERPNext-Inspired Black & White Theme
+ * 
+ * Purpose:
+ * - Professional, minimal color palette
+ * - High contrast for readability
+ * - Clean, business-focused design
+ * - Color only for status and minimal accents
+ * 
+ * Controls: colors, spacing, shadows, animations, and all visual design tokens
  * Supports both light and dark modes
  */
 
-// Light Mode Theme (Default)
+// Light Mode Theme (Default) - ERPNext Style
 export const theme = {
   colors: {
     primary: {
-      DEFAULT: '#222A35',
-      light: '#3A4556',
-      dark: '#1A2029',
+      DEFAULT: '#111827',      // Near black for text
+      light: '#374151',        // Dark gray
+      dark: '#000000',         // Pure black
       foreground: '#FFFFFF'
     },
     secondary: {
-      DEFAULT: '#ADB5BD',
-      light: '#CED4DA',
-      dark: '#6C757D',
-      foreground: '#222A35'
+      DEFAULT: '#6B7280',      // Medium gray
+      light: '#9CA3AF',        // Light gray
+      dark: '#4B5563',         // Darker gray
+      foreground: '#111827'
     },
     accent: {
-      DEFAULT: '#30B8F2',
-      light: '#5DCBF7',
-      dark: '#1B96D1',
+      DEFAULT: '#2563EB',      // Professional blue (minimal use)
+      light: '#3B82F6',        // Lighter blue
+      dark: '#1D4ED8',         // Darker blue
       foreground: '#FFFFFF'
     },
-    success: '#39D98A',
-    warning: '#FFBC42',
-    error: '#FF5F56',
-    info: '#5DA9E9',
+    success: '#10B981',        // Clean green
+    warning: '#F59E0B',        // Amber
+    error: '#EF4444',          // Red
+    info: '#3B82F6',           // Blue
     background: {
-      DEFAULT: '#FAFBFC',
-      secondary: '#F6F8FA',
-      tertiary: '#EEECEC',
-      dark: '#1A1D23'
+      DEFAULT: '#FFFFFF',      // Pure white
+      secondary: '#F9FAFB',    // Very light gray
+      tertiary: '#F3F4F6',     // Light gray
+      dark: '#111827'
     },
     surface: {
-      DEFAULT: 'rgba(255, 255, 255, 0.95)',
-      glass: 'rgba(255, 255, 255, 0.75)',
+      DEFAULT: '#FFFFFF',      // Pure white surface
+      glass: 'rgba(255, 255, 255, 0.98)',
       elevated: '#FFFFFF'
     },
     sidebar: {
-      background: '#F6F8FA',
-      hover: 'rgba(48, 184, 242, 0.08)',
-      active: 'rgba(48, 184, 242, 0.12)',
-      border: 'rgba(173, 181, 189, 0.15)'
+      background: '#FFFFFF',   // White sidebar
+      hover: '#F3F4F6',        // Light gray hover
+      active: '#E5E7EB',       // Gray active
+      border: '#E5E7EB'
     },
     kpi: {
-      good: '#39D98A',
-      warning: '#FFBC42',
-      critical: '#ED254E',
-      neutral: '#ADB5BD'
+      good: '#10B981',         // Green
+      warning: '#F59E0B',      // Amber
+      critical: '#EF4444',     // Red
+      neutral: '#6B7280'       // Gray
     },
     text: {
-      primary: '#222A35',
-      secondary: '#6C757D',
-      tertiary: '#ADB5BD',
+      primary: '#111827',      // Almost black
+      secondary: '#6B7280',    // Medium gray
+      tertiary: '#9CA3AF',     // Light gray
       inverse: '#FFFFFF',
-      muted: '#CED4DA'
+      muted: '#D1D5DB'
     },
     border: {
-      DEFAULT: 'rgba(173, 181, 189, 0.2)',
-      light: 'rgba(173, 181, 189, 0.1)',
-      medium: 'rgba(173, 181, 189, 0.3)',
-      dark: 'rgba(34, 42, 53, 0.15)'
+      DEFAULT: '#E5E7EB',      // Light gray border
+      light: '#F3F4F6',        // Very light
+      medium: '#D1D5DB',       // Medium gray
+      dark: '#9CA3AF'
     }
   },
 
   typography: {
     fontFamily: {
-      sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-      mono: ['JetBrains Mono', 'Menlo', 'Monaco', 'monospace']
+      sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+      mono: ['JetBrains Mono', 'Fira Code', 'Menlo', 'Monaco', 'monospace']
     },
     fontSize: {
-      xs: '0.75rem',
-      sm: '0.875rem',
-      base: '1rem',
-      lg: '1.125rem',
-      xl: '1.25rem',
-      '2xl': '1.5rem',
-      '3xl': '1.875rem',
-      '4xl': '2.25rem',
-      '5xl': '3rem'
+      xs: '0.75rem',      // 12px
+      sm: '0.875rem',     // 14px
+      base: '1rem',       // 16px
+      lg: '1.125rem',     // 18px
+      xl: '1.25rem',      // 20px
+      '2xl': '1.5rem',    // 24px
+      '3xl': '1.875rem',  // 30px
+      '4xl': '2.25rem',   // 36px
+      '5xl': '3rem'       // 48px
     },
     fontWeight: {
       light: 300,
@@ -93,97 +100,97 @@ export const theme = {
       extrabold: 800
     },
     lineHeight: {
-      tight: 1.2,
-      normal: 1.5,
+      tight: 1.25,
+      normal: 1.6,
       relaxed: 1.75
     }
   },
 
   spacing: {
-    xs: '0.25rem',
-    sm: '0.5rem',
-    md: '1rem',
-    lg: '1.5rem',
-    xl: '2rem',
-    '2xl': '3rem',
-    '3xl': '4rem',
-    '4xl': '6rem'
+    xs: '0.25rem',   // 4px
+    sm: '0.5rem',    // 8px
+    md: '1rem',      // 16px
+    lg: '1.5rem',    // 24px
+    xl: '2rem',      // 32px
+    '2xl': '3rem',   // 48px
+    '3xl': '4rem',   // 64px
+    '4xl': '6rem'    // 96px
   },
 
   borderRadius: {
     none: '0',
-    sm: '6px',
-    md: '12px',
-    lg: '16px',
-    xl: '20px',
-    '2xl': '24px',
+    sm: '0.25rem',   // 4px
+    md: '0.375rem',  // 6px
+    lg: '0.5rem',    // 8px
+    xl: '0.75rem',   // 12px
+    '2xl': '1rem',   // 16px
     full: '9999px'
   },
 
   shadow: {
     none: 'none',
-    soft: '0 2px 8px rgba(34, 42, 53, 0.06)',
-    medium: '0 4px 16px rgba(34, 42, 53, 0.08)',
-    large: '0 8px 24px rgba(34, 42, 53, 0.10)',
-    glass: '0 4px 24px rgba(34, 42, 53, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
-    glow: '0 0 24px rgba(48, 184, 242, 0.25)',
-    inner: 'inset 0 2px 4px rgba(34, 42, 53, 0.06)'
+    soft: '0 1px 2px rgba(0, 0, 0, 0.05)',      // Very subtle
+    medium: '0 1px 3px rgba(0, 0, 0, 0.1)',     // Subtle
+    large: '0 4px 6px rgba(0, 0, 0, 0.1)',      // Light shadow
+    glass: '0 1px 3px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3)',
+    glow: '0 0 0 3px rgba(37, 99, 235, 0.1)',   // Minimal glow
+    inner: 'inset 0 1px 2px rgba(0, 0, 0, 0.05)'
   },
 
   motion: {
     duration: {
       instant: '100ms',
-      fast: '180ms',
-      normal: '340ms',
-      slow: '600ms',
-      slower: '900ms'
+      fast: '150ms',      // Faster for snappier feel
+      normal: '200ms',    // Reduced from 340ms
+      slow: '300ms',      // Reduced from 600ms
+      slower: '500ms'     // Reduced from 900ms
     },
     easing: {
-      default: [0.22, 1, 0.36, 1],
-      spring: [0.16, 1, 0.3, 1],
-      bounce: [0.68, -0.55, 0.265, 1.55],
-      smooth: [0.4, 0, 0.2, 1]
+      default: [0.4, 0, 0.2, 1],          // Standard easing
+      spring: [0.16, 1, 0.3, 1],          // Spring
+      bounce: [0.68, -0.55, 0.265, 1.55], // Bounce
+      smooth: [0.25, 0.1, 0.25, 1]        // Smooth
     },
     transitions: {
       pageEnter: {
-        initial: { opacity: 0, y: 20 },
+        initial: { opacity: 0, y: 10 },
         animate: { opacity: 1, y: 0 },
-        exit: { opacity: 0, y: -20 },
-        transition: { duration: 0.34, ease: [0.22, 1, 0.36, 1] }
+        exit: { opacity: 0, y: -10 },
+        transition: { duration: 0.2, ease: [0.4, 0, 0.2, 1] }
       },
       fadeIn: {
         initial: { opacity: 0 },
         animate: { opacity: 1 },
         exit: { opacity: 0 },
-        transition: { duration: 0.18 }
+        transition: { duration: 0.15 }
       },
       slideInRight: {
         initial: { x: '100%', opacity: 0 },
         animate: { x: 0, opacity: 1 },
         exit: { x: '100%', opacity: 0 },
-        transition: { duration: 0.34, ease: [0.22, 1, 0.36, 1] }
+        transition: { duration: 0.2, ease: [0.4, 0, 0.2, 1] }
       },
       scaleIn: {
         initial: { scale: 0.95, opacity: 0 },
         animate: { scale: 1, opacity: 1 },
         exit: { scale: 0.95, opacity: 0 },
-        transition: { duration: 0.18 }
+        transition: { duration: 0.15 }
       }
     }
   },
 
   background: {
-    type: 'particles',
-    shimmerIntensity: 0.35,
-    particleCount: 50,
-    particleSpeed: 0.5,
-    reactiveness: 0.4,
-    colors: ['#30B8F2', '#5DCBF7', '#ADB5BD'],
-    enabled: true
+    type: 'none',           // Disabled for clean look
+    shimmerIntensity: 0,    // No shimmer
+    particleCount: 0,       // No particles
+    particleSpeed: 0,
+    reactiveness: 0,
+    colors: [],
+    enabled: false          // Completely disabled
   },
 
   rollingText: {
-    speed: 32,
+    speed: 30,
     gap: 48,
     pauseOnHover: true
   },
@@ -194,11 +201,11 @@ export const theme = {
         expanded: '280px',
         collapsed: '80px'
       },
-      transitionDuration: '340ms'
+      transitionDuration: '200ms'   // Faster transition
     },
     card: {
       padding: '1.5rem',
-      borderRadius: '12px',
+      borderRadius: '0.5rem',       // 8px - cleaner
       shadow: 'soft'
     },
     button: {
@@ -215,14 +222,14 @@ export const theme = {
     },
     input: {
       height: '44px',
-      borderRadius: '8px',
+      borderRadius: '0.375rem',     // 6px - cleaner
       focusRingWidth: '2px',
-      focusRingColor: 'rgba(48, 184, 242, 0.3)'
+      focusRingColor: 'rgba(37, 99, 235, 0.3)'
     },
     table: {
       rowHeight: '56px',
       headerHeight: '48px',
-      stripedOpacity: 0.03
+      stripedOpacity: 0.02          // Very subtle stripes
     }
   },
 
@@ -246,90 +253,94 @@ export const theme = {
   }
 };
 
-// Dark Mode Theme
+// Dark Mode Theme - Clean Dark
 export const darkTheme = {
   colors: {
     primary: {
-      DEFAULT: '#E8EAED',
-      light: '#F8F9FA',
-      dark: '#CED4DA',
-      foreground: '#1A1D23'
+      DEFAULT: '#F9FAFB',      // Near white
+      light: '#FFFFFF',        // Pure white
+      dark: '#E5E7EB',         // Light gray
+      foreground: '#111827'
     },
     secondary: {
-      DEFAULT: '#6C757D',
-      light: '#ADB5BD',
-      dark: '#495057',
-      foreground: '#E8EAED'
+      DEFAULT: '#9CA3AF',      // Medium gray
+      light: '#D1D5DB',        // Light gray
+      dark: '#6B7280',         // Darker gray
+      foreground: '#F9FAFB'
     },
     accent: {
-      DEFAULT: '#5DCBF7',
-      light: '#8DDBF9',
-      dark: '#30B8F2',
-      foreground: '#1A1D23'
+      DEFAULT: '#60A5FA',      // Lighter blue for dark mode
+      light: '#93C5FD',        // Light blue
+      dark: '#3B82F6',         // Medium blue
+      foreground: '#111827'
     },
-    success: '#4AE99E',
-    warning: '#FFD666',
-    error: '#FF7B72',
-    info: '#79C0FF',
+    success: '#34D399',        // Vibrant green
+    warning: '#FBBF24',        // Bright amber
+    error: '#F87171',          // Bright red
+    info: '#60A5FA',           // Bright blue
     background: {
-      DEFAULT: '#0D1117',
-      secondary: '#161B22',
-      tertiary: '#1C2128',
-      dark: '#010409'
+      DEFAULT: '#111827',      // Very dark
+      secondary: '#1F2937',    // Dark gray
+      tertiary: '#374151',     // Medium dark
+      dark: '#000000'
     },
     surface: {
-      DEFAULT: 'rgba(22, 27, 34, 0.95)',
-      glass: 'rgba(22, 27, 34, 0.75)',
-      elevated: '#1C2128'
+      DEFAULT: '#1F2937',      // Dark surface
+      glass: 'rgba(31, 41, 55, 0.98)',
+      elevated: '#374151'
     },
     sidebar: {
-      background: '#161B22',
-      hover: 'rgba(93, 203, 247, 0.12)',
-      active: 'rgba(93, 203, 247, 0.18)',
-      border: 'rgba(173, 181, 189, 0.1)'
+      background: '#1F2937',   // Dark sidebar
+      hover: '#374151',        // Medium dark hover
+      active: '#4B5563',       // Lighter active
+      border: '#374151'
     },
     kpi: {
-      good: '#4AE99E',
-      warning: '#FFD666',
-      critical: '#FF7B72',
-      neutral: '#6C757D'
+      good: '#34D399',         // Vibrant green
+      warning: '#FBBF24',      // Bright amber
+      critical: '#F87171',     // Bright red
+      neutral: '#9CA3AF'       // Gray
     },
     text: {
-      primary: '#E8EAED',
-      secondary: '#ADB5BD',
-      tertiary: '#6C757D',
-      inverse: '#1A1D23',
-      muted: '#495057'
+      primary: '#F9FAFB',      // Near white
+      secondary: '#D1D5DB',    // Light gray
+      tertiary: '#9CA3AF',     // Medium gray
+      inverse: '#111827',
+      muted: '#6B7280'
     },
     border: {
-      DEFAULT: 'rgba(173, 181, 189, 0.15)',
-      light: 'rgba(173, 181, 189, 0.08)',
-      medium: 'rgba(173, 181, 189, 0.25)',
-      dark: 'rgba(232, 234, 237, 0.1)'
+      DEFAULT: '#374151',      // Dark gray border
+      light: '#1F2937',        // Very dark
+      medium: '#4B5563',       // Medium dark
+      dark: '#6B7280'
     }
   },
 
-  // Dark mode uses same structure for other properties
+  // Dark mode inherits same structure
   typography: theme.typography,
   spacing: theme.spacing,
   borderRadius: theme.borderRadius,
   
   shadow: {
     none: 'none',
-    soft: '0 2px 8px rgba(0, 0, 0, 0.3)',
-    medium: '0 4px 16px rgba(0, 0, 0, 0.4)',
-    large: '0 8px 24px rgba(0, 0, 0, 0.5)',
-    glass: '0 4px 24px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
-    glow: '0 0 24px rgba(93, 203, 247, 0.3)',
-    inner: 'inset 0 2px 4px rgba(0, 0, 0, 0.3)'
+    soft: '0 1px 2px rgba(0, 0, 0, 0.3)',
+    medium: '0 1px 3px rgba(0, 0, 0, 0.4)',
+    large: '0 4px 6px rgba(0, 0, 0, 0.5)',
+    glass: '0 1px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+    glow: '0 0 0 3px rgba(96, 165, 250, 0.2)',
+    inner: 'inset 0 1px 2px rgba(0, 0, 0, 0.3)'
   },
 
   motion: theme.motion,
   
   background: {
-    ...theme.background,
-    shimmerIntensity: 0.25,
-    colors: ['#5DCBF7', '#30B8F2', '#6C757D']
+    type: 'none',
+    shimmerIntensity: 0,
+    particleCount: 0,
+    particleSpeed: 0,
+    reactiveness: 0,
+    colors: [],
+    enabled: false
   },
 
   rollingText: theme.rollingText,
@@ -348,6 +359,66 @@ export const getThemeValue = (path: string, isDark = false): any => {
   return path.split('.').reduce((obj, key) => obj?.[key], currentTheme as any);
 };
 
+// Helper to get color with opacity
+export const getColorWithOpacity = (color: string, opacity: number): string => {
+  // Handle hex colors
+  if (color.startsWith('#')) {
+    const r = parseInt(color.slice(1, 3), 16);
+    const g = parseInt(color.slice(3, 5), 16);
+    const b = parseInt(color.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${opacity})`;
+  }
+  // Handle rgba colors
+  if (color.startsWith('rgba')) {
+    return color.replace(/[\d.]+\)$/g, `${opacity})`);
+  }
+  // Handle rgb colors
+  if (color.startsWith('rgb')) {
+    return color.replace('rgb', 'rgba').replace(')', `, ${opacity})`);
+  }
+  return color;
+};
+
+// Helper to determine if color is light or dark
+export const isLightColor = (color: string): boolean => {
+  // Simple luminance calculation
+  if (!color.startsWith('#')) return false;
+  
+  const r = parseInt(color.slice(1, 3), 16);
+  const g = parseInt(color.slice(3, 5), 16);
+  const b = parseInt(color.slice(5, 7), 16);
+  
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return luminance > 0.5;
+};
+
+// Status color helpers
+export const getStatusColor = (status: string, isDark = false): string => {
+  const currentTheme = isDark ? darkTheme : theme;
+  const statusMap: Record<string, string> = {
+    'success': currentTheme.colors.success,
+    'completed': currentTheme.colors.success,
+    'active': currentTheme.colors.success,
+    'in-stock': currentTheme.colors.success,
+    
+    'warning': currentTheme.colors.warning,
+    'pending': currentTheme.colors.warning,
+    'low-stock': currentTheme.colors.warning,
+    
+    'error': currentTheme.colors.error,
+    'failed': currentTheme.colors.error,
+    'out-of-stock': currentTheme.colors.error,
+    'critical': currentTheme.colors.error,
+    
+    'info': currentTheme.colors.info,
+    'dispatched': currentTheme.colors.info,
+    
+    'default': currentTheme.colors.secondary.DEFAULT,
+  };
+  
+  return statusMap[status.toLowerCase()] || statusMap['default'];
+};
+
 // Export individual sections
 export const colors = theme.colors;
 export const darkColors = darkTheme.colors;
@@ -359,3 +430,53 @@ export const darkShadows = darkTheme.shadow;
 
 // Export light theme as default
 export { theme as lightTheme };
+
+// Preset configurations for common UI patterns
+export const presets = {
+  card: {
+    default: {
+      padding: spacing.lg,
+      borderRadius: theme.borderRadius.lg,
+      shadow: theme.shadow.soft,
+      border: `1px solid ${colors.border.DEFAULT}`
+    },
+    elevated: {
+      padding: spacing.lg,
+      borderRadius: theme.borderRadius.lg,
+      shadow: theme.shadow.medium,
+      border: 'none'
+    },
+    flat: {
+      padding: spacing.lg,
+      borderRadius: theme.borderRadius.md,
+      shadow: 'none',
+      border: `1px solid ${colors.border.DEFAULT}`
+    }
+  },
+  button: {
+    primary: {
+      background: colors.accent.DEFAULT,
+      color: colors.accent.foreground,
+      border: 'none',
+      shadow: 'none'
+    },
+    secondary: {
+      background: colors.secondary.light,
+      color: colors.secondary.foreground,
+      border: 'none',
+      shadow: 'none'
+    },
+    outline: {
+      background: 'transparent',
+      color: colors.text.primary,
+      border: `1px solid ${colors.border.DEFAULT}`,
+      shadow: 'none'
+    },
+    ghost: {
+      background: 'transparent',
+      color: colors.text.primary,
+      border: 'none',
+      shadow: 'none'
+    }
+  }
+};

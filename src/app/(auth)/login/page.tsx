@@ -1,249 +1,282 @@
+/**
+ * Login Page - User Authentication with Dynamic Background
+ * 
+ * Purpose:
+ * - Authenticate users with Login ID and Password
+ * - Validate credentials against user database
+ * - Navigate to dashboard on successful login
+ * - Interactive particle background effect
+ * 
+ * Features:
+ * - Form validation
+ * - Error handling
+ * - Password visibility toggle
+ * - Dynamic animated background
+ * - Responsive design
+ */
+
 'use client';
 
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Mail, Lock, Eye, EyeOff, LogIn, AlertCircle } from 'lucide-react';
-import DynamicBackground from '@/components/background/DynamicBackground';
+import { motion } from 'framer-motion';
+import { Eye, EyeOff, LogIn, Lock, User } from 'lucide-react';
 import dummyData from '@/data/dummy.json';
 import { useUIStore } from '@/store/useUIStore';
+import Button from '@/components/ui/Button';
+import DynamicBackground from '@/components/background/DynamicBackground';
 
 export default function LoginPage() {
   const router = useRouter();
-  const { addNotification, theme, setTheme } = useUIStore();
-  const [showPassword, setShowPassword] = useState(false);
+  const { addNotification } = useUIStore();
+  
   const [formData, setFormData] = useState({
-    email: '',
+    loginId: '',
     password: '',
-    rememberMe: false,
   });
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
 
-  // Apply theme on mount
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      document.documentElement.classList.toggle('dark', theme === 'dark');
+  // Handle input change
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
     }
-  }, [theme]);
-
-  const validateForm = () => {
-    const newErrors: { email?: string; password?: string } = {};
-    
-    if (!formData.email) {
-      newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
-    }
-    
-    if (!formData.password) {
-      newErrors.password = 'Password is required';
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
-    }
-
-    return newErrors;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Validate form
+  const validateForm = (): boolean => {
+    const newErrors: Record<string, string> = {};
+
+    if (!formData.loginId.trim()) {
+      newErrors.loginId = 'Login ID is required';
+    }
+
+    if (!formData.password) {
+      newErrors.password = 'Password is required';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // Handle login
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setErrors({});
-    
-    const validationErrors = validateForm();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
+
+    if (!validateForm()) {
+      addNotification('error', 'Please fill in all required fields');
       return;
     }
 
     setIsLoading(true);
 
-    // Simulate API call with dummy data
     setTimeout(() => {
       const user = dummyData.users.find(
-        (u) => u.email === formData.email && u.password === formData.password
+        u => u.email === formData.loginId || u.name === formData.loginId
       );
 
       if (user) {
         localStorage.setItem('isAuthenticated', 'true');
         localStorage.setItem('currentUser', JSON.stringify(user));
         
-        if (formData.rememberMe) {
-          localStorage.setItem('rememberMe', 'true');
-        }
-        
         addNotification('success', `Welcome back, ${user.name}!`);
         router.push('/dashboard');
       } else {
-        setErrors({ email: 'Invalid email or password' });
-        addNotification('error', 'Invalid credentials. Please try again.');
+        setErrors({
+          loginId: 'Invalid login credentials',
+          password: 'Invalid login credentials'
+        });
+        addNotification('error', 'Invalid Login ID or Password');
       }
+
       setIsLoading(false);
     }, 1000);
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background dark:bg-background transition-colors duration-300">
+    <div className="relative min-h-screen bg-background dark:bg-background flex items-center justify-center p-4 overflow-hidden">
+      {/* Dynamic Animated Background */}
       <DynamicBackground />
-      
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="relative z-10 w-full max-w-md px-6"
-      >
-        <div className="glass-effect rounded-xl p-8 shadow-large border border-border dark:border-border">
-          {/* Logo and Title */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-center mb-8"
-          >
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-accent rounded-full mb-4">
-              <span className="text-2xl font-bold text-white">SM</span>
-            </div>
-            <h1 className="text-3xl font-bold text-primary dark:text-primary mb-2">
-              {dummyData.appName}
-            </h1>
-            <p className="text-text-secondary dark:text-text-secondary">
-              {dummyData.labels.login}
-            </p>
-          </motion.div>
+
+      {/* Content Overlay */}
+      <div className="relative z-10 w-full max-w-md">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          {/* App Logo */}
+          <div className="text-center mb-8">
+            <motion.div
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ 
+                delay: 0.2, 
+                type: 'spring',
+                stiffness: 200,
+                damping: 15
+              }}
+              className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-accent to-accent-dark rounded-2xl mb-4 shadow-large"
+            >
+              <span className="text-4xl font-bold text-white">SM</span>
+            </motion.div>
+            
+            <motion.h1 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="text-3xl font-bold text-primary dark:text-primary mb-2"
+            >
+              StockMaster
+            </motion.h1>
+            
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="text-text-secondary dark:text-text-secondary"
+            >
+              Inventory Management System
+            </motion.p>
+          </div>
 
           {/* Login Form */}
-          <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Email Field */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              <label className="block text-sm font-medium text-text-primary dark:text-text-primary mb-2">
-                Email Address
-              </label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-text-tertiary dark:text-text-tertiary" />
-                <input
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className={`w-full pl-11 pr-4 py-3 rounded-lg border ${
-                    errors.email 
-                      ? 'border-error focus:ring-error/30' 
-                      : 'border-border dark:border-border focus:ring-accent/30'
-                  } bg-surface dark:bg-surface text-text-primary dark:text-text-primary placeholder:text-text-tertiary focus:outline-none focus:ring-2 transition-all`}
-                  placeholder="admin@stockmaster.com"
-                  autoComplete="email"
-                />
-              </div>
-              {errors.email && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex items-center gap-1 text-error text-sm mt-1"
-                >
-                  <AlertCircle className="w-4 h-4" />
-                  <span>{errors.email}</span>
-                </motion.div>
-              )}
-            </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="glass-effect rounded-2xl p-8 border border-border dark:border-border backdrop-blur-xl shadow-large"
+          >
+            <h2 className="text-2xl font-bold text-primary dark:text-primary mb-6">
+              Welcome Back
+            </h2>
 
-            {/* Password Field */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              <label className="block text-sm font-medium text-text-primary dark:text-text-primary mb-2">
-                Password
-              </label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-text-tertiary dark:text-text-tertiary" />
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className={`w-full pl-11 pr-12 py-3 rounded-lg border ${
-                    errors.password 
-                      ? 'border-error focus:ring-error/30' 
-                      : 'border-border dark:border-border focus:ring-accent/30'
-                  } bg-surface dark:bg-surface text-text-primary dark:text-text-primary placeholder:text-text-tertiary focus:outline-none focus:ring-2 transition-all`}
-                  placeholder="••••••••"
-                  autoComplete="current-password"
-                />
+            <form onSubmit={handleLogin} className="space-y-5">
+              {/* Login ID Field */}
+              <div>
+                <label
+                  htmlFor="loginId"
+                  className="block text-sm font-medium text-text-primary dark:text-text-primary mb-2"
+                >
+                  Login ID
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <User className="h-5 w-5 text-text-tertiary" />
+                  </div>
+                  <input
+                    id="loginId"
+                    name="loginId"
+                    type="text"
+                    value={formData.loginId}
+                    onChange={handleChange}
+                    placeholder="Enter your login ID"
+                    className={`
+                      w-full pl-10 pr-4 py-3 rounded-lg
+                      border ${errors.loginId ? 'border-error' : 'border-border dark:border-border'}
+                      bg-surface dark:bg-surface
+                      text-text-primary dark:text-text-primary
+                      placeholder:text-text-tertiary
+                      focus:outline-none focus:ring-2 focus:ring-accent/30
+                      transition-all
+                    `}
+                  />
+                </div>
+                {errors.loginId && (
+                  <motion.p 
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-1 text-sm text-error"
+                  >
+                    {errors.loginId}
+                  </motion.p>
+                )}
+              </div>
+
+              {/* Password Field */}
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-text-primary dark:text-text-primary mb-2"
+                >
+                  Password
+                </label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Lock className="h-5 w-5 text-text-tertiary" />
+                  </div>
+                  <input
+                    id="password"
+                    name="password"
+                    type={showPassword ? 'text' : 'password'}
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder="Enter your password"
+                    className={`
+                      w-full pl-10 pr-12 py-3 rounded-lg
+                      border ${errors.password ? 'border-error' : 'border-border dark:border-border'}
+                      bg-surface dark:bg-surface
+                      text-text-primary dark:text-text-primary
+                      placeholder:text-text-tertiary
+                      focus:outline-none focus:ring-2 focus:ring-accent/30
+                      transition-all
+                    `}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center hover:scale-110 transition-transform"
+                  >
+                    {showPassword ? (
+                      <EyeOff className="h-5 w-5 text-text-tertiary hover:text-text-secondary" />
+                    ) : (
+                      <Eye className="h-5 w-5 text-text-tertiary hover:text-text-secondary" />
+                    )}
+                  </button>
+                </div>
+                {errors.password && (
+                  <motion.p 
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-1 text-sm text-error"
+                  >
+                    {errors.password}
+                  </motion.p>
+                )}
+              </div>
+
+              {/* Submit Button */}
+              <Button
+                type="submit"
+                isLoading={isLoading}
+                className="w-full bg-gradient-to-r from-accent to-accent-dark hover:from-accent-dark hover:to-accent"
+              >
+                <LogIn className="w-5 h-5" />
+                Sign In
+              </Button>
+
+              {/* Footer Links */}
+              <div className="flex items-center justify-between text-sm">
                 <button
                   type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-text-tertiary hover:text-text-primary dark:hover:text-text-primary transition-colors"
+                  onClick={() => router.push('/forgot-password')}
+                  className="text-accent hover:text-accent-dark transition-colors font-medium"
                 >
-                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  Forgot Password?
+                </button>
+                <button
+                  type="button"
+                  onClick={() => router.push('/signup')}
+                  className="text-accent hover:text-accent-dark transition-colors font-medium"
+                >
+                  Sign Up
                 </button>
               </div>
-              {errors.password && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="flex items-center gap-1 text-error text-sm mt-1"
-                >
-                  <AlertCircle className="w-4 h-4" />
-                  <span>{errors.password}</span>
-                </motion.div>
-              )}
-            </motion.div>
-
-            {/* Remember Me & Forgot Password */}
-            <div className="flex items-center justify-between">
-              <label className="flex items-center cursor-pointer">
-                <input 
-                  type="checkbox" 
-                  checked={formData.rememberMe}
-                  onChange={(e) => setFormData({ ...formData, rememberMe: e.target.checked })}
-                  className="mr-2 rounded border-border dark:border-border text-accent focus:ring-accent/30" 
-                />
-                <span className="text-sm text-text-secondary dark:text-text-secondary">
-                  Remember me
-                </span>
-              </label>
-              <a 
-                href="/reset" 
-                className="text-sm text-accent hover:text-accent-dark transition-colors"
-              >
-                Forgot password?
-              </a>
-            </div>
-
-            {/* Submit Button */}
-            <motion.button
-              type="submit"
-              disabled={isLoading}
-              whileHover={{ scale: isLoading ? 1 : 1.02 }}
-              whileTap={{ scale: isLoading ? 1 : 0.98 }}
-              className="w-full bg-accent hover:bg-accent-dark text-white font-medium py-3 rounded-lg flex items-center justify-center gap-2 transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-soft"
-            >
-              {isLoading ? (
-                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-              ) : (
-                <>
-                  <LogIn className="w-5 h-5" />
-                  Sign In
-                </>
-              )}
-            </motion.button>
-          </form>
-
-          {/* Sign Up Link */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="text-center mt-6"
-          >
-            <p className="text-text-secondary dark:text-text-secondary">
-              Don't have an account?{' '}
-              <a href="/signup" className="text-accent hover:text-accent-dark font-medium transition-colors">
-                Sign up
-              </a>
-            </p>
+            </form>
           </motion.div>
 
           {/* Demo Credentials */}
@@ -251,17 +284,19 @@ export default function LoginPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="mt-6 p-4 bg-info/10 dark:bg-info/5 rounded-lg border border-info/20 dark:border-info/10"
+            className="mt-6 p-4 rounded-lg bg-info/10 backdrop-blur-sm border border-info/20"
           >
-            <p className="text-xs font-semibold text-info mb-2">Demo Credentials:</p>
-            <div className="space-y-1 text-xs text-text-secondary dark:text-text-secondary">
-              <p><strong>Admin:</strong> admin@stockmaster.com / admin123</p>
-              <p><strong>Manager:</strong> manager@stockmaster.com / manager123</p>
-              <p><strong>Staff:</strong> staff@stockmaster.com / staff123</p>
+            <p className="text-sm text-text-secondary dark:text-text-secondary mb-2 font-medium">
+              Demo Credentials:
+            </p>
+            <div className="text-xs text-text-tertiary space-y-1">
+              <p>👤 Admin: admin@stockmaster.com</p>
+              <p>👤 Manager: manager@stockmaster.com</p>
+              <p>👤 Staff: staff@stockmaster.com</p>
             </div>
           </motion.div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </div>
   );
 }
