@@ -1,8 +1,0 @@
-{
-  "/(main)/dashboard/page": "app/(main)/dashboard/page.js",
-  "/(main)/operations/deliveries/page": "app/(main)/operations/deliveries/page.js",
-  "/(main)/operations/transfers/page": "app/(main)/operations/transfers/page.js",
-  "/(main)/history/page": "app/(main)/history/page.js",
-  "/(main)/settings/page": "app/(main)/settings/page.js",
-  "/(main)/products/page": "app/(main)/products/page.js"
-}
