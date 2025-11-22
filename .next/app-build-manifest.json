@@ -19,6 +19,7 @@
     "/dashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
+      "static/css/app/dashboard/page.css",
       "static/chunks/app/dashboard/page.js"
     ],
     "/dashboard/layout": [
@@ -31,15 +32,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/dashboard/products/page.js"
     ],
+    "/dashboard/warehouses/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/dashboard/warehouses/page.js"
+    ],
     "/dashboard/operations/receipts/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/dashboard/operations/receipts/page.js"
-    ],
-    "/dashboard/products/new/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/products/new/page.js"
     ],
     "/dashboard/history/page": [
       "static/chunks/webpack.js",
@@ -51,40 +52,30 @@
       "static/chunks/main-app.js",
       "static/chunks/app/dashboard/stock-moves/page.js"
     ],
-    "/dashboard/warehouses/page": [
+    "/dashboard/operations/deliveries/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/warehouses/page.js"
-    ],
-    "/dashboard/settings/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/settings/page.js"
-    ],
-    "/dashboard/operations/receipts/new/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/operations/receipts/new/page.js"
-    ],
-    "/dashboard/operations/deliveries/new/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/operations/deliveries/new/page.js"
+      "static/chunks/app/dashboard/operations/deliveries/page.js"
     ],
     "/dashboard/stock-moves/[id]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/dashboard/stock-moves/[id]/page.js"
     ],
-    "/dashboard/operations/deliveries/page": [
+    "/dashboard/operations/deliveries/new/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/dashboard/operations/deliveries/page.js"
+      "static/chunks/app/dashboard/operations/deliveries/new/page.js"
     ],
     "/dashboard/profile/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/dashboard/profile/page.js"
+    ],
+    "/dashboard/settings/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/dashboard/settings/page.js"
     ]
   }
 }

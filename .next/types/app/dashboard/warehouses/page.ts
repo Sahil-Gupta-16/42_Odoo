@@ -1,4 +1,4 @@
-// File: /home/rs/Projects/odoo_42/inventory-system/src/app/dashboard/warehouses/page.tsx
+// File: C:\Users\Nikhil Vishwakarma\Desktop\42_Odoo\src\app\dashboard\warehouses\page.tsx
 import * as entry from '../../../../../src/app/dashboard/warehouses/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

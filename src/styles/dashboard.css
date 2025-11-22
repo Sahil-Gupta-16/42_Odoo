@@ -1,0 +1,151 @@
+/* Dashboard Grid Styles - Following 8pt Grid System [web:106][web:108][web:110] */
+
+.react-grid-layout {
+  position: relative;
+  transition: height 200ms ease;
+}
+
+.react-grid-item {
+  transition: all 200ms ease;
+  transition-property: left, top, width, height;
+  box-sizing: border-box;
+}
+
+.react-grid-item.react-grid-placeholder {
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.15) 0%,
+    rgba(147, 51, 234, 0.15) 100%
+  );
+  opacity: 0.6;
+  transition-duration: 100ms;
+  z-index: 2;
+  border-radius: 16px;
+  border: 2px dashed rgba(59, 130, 246, 0.5);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.react-grid-item.resizing {
+  transition: none;
+  z-index: 100;
+  will-change: width, height;
+  opacity: 0.9;
+}
+
+.react-grid-item.react-draggable-dragging {
+  transition: none;
+  z-index: 100;
+  will-change: transform;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(59, 130, 246, 0.3);
+  opacity: 0.95;
+  transform: rotate(1deg) scale(1.02);
+}
+
+.react-grid-item > .react-resizable-handle {
+  position: absolute;
+  width: 24px; /* 3 * 8pt */
+  height: 24px; /* 3 * 8pt */
+  bottom: 0;
+  right: 0;
+  cursor: se-resize;
+  z-index: 10;
+}
+
+.react-grid-item > .react-resizable-handle::after {
+  content: "";
+  position: absolute;
+  right: 4px; /* 8pt / 2 */
+  bottom: 4px; /* 8pt / 2 */
+  width: 12px; /* 8pt * 1.5 */
+  height: 12px; /* 8pt * 1.5 */
+  border-right: 3px solid rgba(59, 130, 246, 0.7);
+  border-bottom: 3px solid rgba(59, 130, 246, 0.7);
+  border-radius: 0 0 4px 0;
+}
+
+.react-grid-item > .react-resizable-handle::before {
+  content: "";
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 16px;
+  height: 16px;
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.2) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: ripple 2s ease-out infinite;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Drag Handle Styles */
+.drag-handle {
+  transition: all 200ms ease;
+}
+
+.drag-handle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.drag-handle:active {
+  transform: scale(0.95);
+}
+
+/* Glass Effect Enhancement */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Scrollbar Styling - 8pt width */
+.overflow-auto::-webkit-scrollbar {
+  width: 8px; /* 8pt */
+  height: 8px; /* 8pt */
+}
+
+.overflow-auto::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.overflow-auto::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.3);
+  border-radius: 4px;
+  transition: background 200ms ease;
+}
+
+.overflow-auto::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.5);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .react-grid-item > .react-resizable-handle {
+    width: 32px;
+    height: 32px;
+  }
+}

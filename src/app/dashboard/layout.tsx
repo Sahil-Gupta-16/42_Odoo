@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { usePathname, useRouter } from 'next/navigation';
-import { useUIStore } from '@/store/useUIStore';
-import Header from '@/components/layout/Header';
-import Sidebar from '@/components/layout/Sidebar';
-import NotificationToast from '@/components/ui/NotificationToast';
+import { useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { usePathname, useRouter } from "next/navigation";
+import { useUIStore } from "@/store/useUIStore";
+import Header from "@/components/layout/Header";
+import Sidebar from "@/components/layout/Sidebar";
+import NotificationToast from "@/components/ui/NotificationToast";
 
 export default function DashboardLayout({
   children,
@@ -19,31 +19,31 @@ export default function DashboardLayout({
 
   // Check authentication on mount
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const isAuthenticated = localStorage.getItem('isAuthenticated');
-      if (!isAuthenticated || isAuthenticated !== 'true') {
-        router.push('/login');
+    if (typeof window !== "undefined") {
+      const isAuthenticated = localStorage.getItem("isAuthenticated");
+      if (!isAuthenticated || isAuthenticated !== "true") {
+        router.push("/login");
       }
     }
   }, [router]);
 
   // Apply theme on mount and when it changes
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      document.documentElement.classList.toggle('dark', theme === 'dark');
+    if (typeof window !== "undefined") {
+      document.documentElement.classList.toggle("dark", theme === "dark");
     }
   }, [theme]);
 
   return (
     <div className="min-h-screen bg-background dark:bg-background transition-colors duration-300 overflow-x-hidden">
       <Header />
-      
+
       <div className="flex relative w-full">
         <Sidebar />
-        
+
         <main
           className={`flex-1 w-full min-h-[calc(100vh-4rem)] transition-all duration-300 ${
-            sidebarOpen ? 'pl-0 md:pl-[280px]' : 'pl-0 md:pl-[80px]'
+            sidebarOpen ? "pl-0 md:pl-[280px]" : "pl-0 md:pl-[80px]"
           }`}
         >
           <div className="w-full max-w-full p-4 md:p-6 overflow-x-hidden">
