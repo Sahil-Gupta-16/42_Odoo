@@ -44,7 +44,7 @@ export default function DashboardLayout({
           <Sidebar />
 
           <main
-            className={`flex-1 w-full min-h-[calc(100vh-4rem)] transition-all duration-300 ${sidebarOpen ? 'pl-0 md:pl-[280px]' : 'pl-0 md:pl-[80px]'
+            className={`flex-1 w-full min-h-screen pt-16 transition-all duration-300 ${sidebarOpen ? 'pl-0 md:pl-[280px]' : 'pl-0 md:pl-[80px]'
               }`}
           >
             <div className="w-full max-w-full p-4 md:p-6 overflow-x-hidden">

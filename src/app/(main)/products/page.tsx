@@ -53,7 +53,7 @@ export default function ProductsPage() {
     };
 
     return (
-        <div className="p-6 md:p-8 max-w-[1600px] mx-auto space-y-6">
+        <div className="max-w-[1600px] mx-auto space-y-6">
             {/* Page Header */}
             <div className="pb-4">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">

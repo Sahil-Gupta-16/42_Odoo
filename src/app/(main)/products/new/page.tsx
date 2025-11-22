@@ -123,7 +123,7 @@ export default function AddProductPage() {
   };
 
   return (
-    <div className="p-6 md:p-8 max-w-[1200px] mx-auto space-y-6">
+    <div className="max-w-[1200px] mx-auto space-y-6">
       {/* Breadcrumb */}
       <div className="flex items-center gap-3">
         <Button variant="ghost" size="sm" onClick={() => router.back()} className="h-8 w-8 p-0">
@@ -357,7 +357,7 @@ export default function AddProductPage() {
               <div>
                 <p className="text-xs text-text-tertiary mb-1">Status</p>
                 <p className={`text-xl font-bold ${formData.stock === 0 ? 'text-error' :
-                    formData.stock <= formData.minStockLevel ? 'text-warning' : 'text-success'
+                  formData.stock <= formData.minStockLevel ? 'text-warning' : 'text-success'
                   }`}>
                   {formData.stock === 0 ? 'Out of Stock' :
                     formData.stock <= formData.minStockLevel ? 'Low Stock' : 'In Stock'}
