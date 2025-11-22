@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Menu, 
-  Search, 
-  Bell, 
-  Settings, 
-  User, 
+import {
+  Menu,
+  Search,
+  Bell,
+  Settings,
+  User,
   LogOut,
   Moon,
   Sun,
@@ -41,7 +41,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-[1020] glass-effect border-b border-border dark:border-border">
+    <header className="fixed top-0 left-0 right-0 z-[1030] glass-effect border-b border-border dark:border-border">
       <div className="flex items-center justify-between h-16 px-6">
         {/* Left Section */}
         <div className="flex items-center gap-4">
@@ -120,7 +120,7 @@ export default function Header() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => router.push('/dashboard/settings')}
+            onClick={() => router.push('/settings')}
             className="p-2 hover:bg-sidebar-hover rounded-lg transition-colors"
           >
             <Settings className="w-5 h-5 text-text-primary dark:text-text-primary" />
@@ -154,7 +154,7 @@ export default function Header() {
                     onClick={() => setShowUserMenu(false)}
                     className="fixed inset-0 z-[1025]"
                   />
-                  
+
                   {/* Menu */}
                   <motion.div
                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
@@ -180,7 +180,7 @@ export default function Header() {
                     <div className="py-1">
                       <button
                         onClick={() => {
-                          router.push('/dashboard/profile');
+                          router.push('/profile');
                           setShowUserMenu(false);
                         }}
                         className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-sidebar-hover transition-colors text-left text-text-primary dark:text-text-primary"
@@ -188,10 +188,10 @@ export default function Header() {
                         <UserCircle className="w-4 h-4" />
                         <span className="text-sm">My Profile</span>
                       </button>
-                      
+
                       <button
                         onClick={() => {
-                          router.push('/dashboard/settings');
+                          router.push('/settings');
                           setShowUserMenu(false);
                         }}
                         className="w-full flex items-center gap-3 px-4 py-2.5 hover:bg-sidebar-hover transition-colors text-left text-text-primary dark:text-text-primary"

@@ -1,10 +1,9 @@
 {
-  "/dashboard/page": "app/dashboard/page.js",
-  "/dashboard/products/page": "app/dashboard/products/page.js",
-  "/dashboard/operations/receipts/page": "app/dashboard/operations/receipts/page.js",
-  "/dashboard/operations/deliveries/page": "app/dashboard/operations/deliveries/page.js",
-  "/dashboard/stock-moves/page": "app/dashboard/stock-moves/page.js",
-  "/dashboard/warehouses/page": "app/dashboard/warehouses/page.js",
-  "/dashboard/history/page": "app/dashboard/history/page.js",
-  "/dashboard/settings/page": "app/dashboard/settings/page.js"
+  "/(main)/history/page": "app/(main)/history/page.js",
+  "/(main)/operations/transfers/page": "app/(main)/operations/transfers/page.js",
+  "/(main)/operations/transfers/[id]/page": "app/(main)/operations/transfers/[id]/page.js",
+  "/(main)/operations/deliveries/page": "app/(main)/operations/deliveries/page.js",
+  "/(main)/products/page": "app/(main)/products/page.js",
+  "/(main)/operations/receipts/page": "app/(main)/operations/receipts/page.js",
+  "/(main)/dashboard/page": "app/(main)/dashboard/page.js"
 }

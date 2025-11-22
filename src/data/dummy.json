@@ -66,7 +66,14 @@
       "capacity": 5000,
       "currentStock": 3250,
       "utilizationPercent": 65,
-      "zones": ["A1", "A2", "A3", "B1", "B2", "B3"],
+      "zones": [
+        "A1",
+        "A2",
+        "A3",
+        "B1",
+        "B2",
+        "B3"
+      ],
       "manager": "Manager Jane",
       "phone": "+1 234 567 8900",
       "status": "active"
@@ -79,7 +86,12 @@
       "capacity": 3000,
       "currentStock": 1800,
       "utilizationPercent": 60,
-      "zones": ["C1", "C2", "D1", "D2"],
+      "zones": [
+        "C1",
+        "C2",
+        "D1",
+        "D2"
+      ],
       "manager": "Staff John",
       "phone": "+1 234 567 8901",
       "status": "active"
@@ -91,28 +103,59 @@
       "name": "Glass Products",
       "description": "Tempered and regular glass sheets of various thicknesses",
       "productCount": 25,
-      "icon": "glass"
+      "icon": "glass",
+      "color": "#3B82F6",
+      "totalValue": 15000
     },
     {
       "id": "cat002",
       "name": "Hardware",
       "description": "Fasteners, brackets, and mounting hardware",
       "productCount": 150,
-      "icon": "wrench"
+      "icon": "wrench",
+      "color": "#F59E0B",
+      "totalValue": 8500
     },
     {
       "id": "cat003",
       "name": "Tools",
       "description": "Hand tools and power tools for installation",
       "productCount": 45,
-      "icon": "tool"
+      "icon": "tool",
+      "color": "#10B981",
+      "totalValue": 12000
     },
     {
       "id": "cat004",
       "name": "Safety Equipment",
       "description": "Personal protective equipment and safety gear",
       "productCount": 30,
-      "icon": "shield"
+      "icon": "shield",
+      "color": "#EF4444",
+      "totalValue": 5000
+    }
+  ],
+  "topProducts": [
+    {
+      "id": "prod001",
+      "name": "12mm Tempered Glass",
+      "sales": 1200,
+      "revenue": 54600,
+      "growth": 15
+    },
+    {
+      "id": "prod004",
+      "name": "Glass Cutter Pro",
+      "sales": 850,
+      "revenue": 106250,
+      "growth": 8
+    },
+    {
+      "id": "prod002",
+      "name": "8mm Clear Glass",
+      "sales": 600,
+      "revenue": 16800,
+      "growth": 12
     }
   ],
   "products": [
@@ -225,19 +268,19 @@
   "receipts": [
     {
       "id": "rec001",
-      "receiptNumber": "RCP-2025-001",
+      "receiptNumber": "WH/IN/0001",
       "warehouse": "Main Warehouse",
       "warehouseId": "wh001",
       "supplier": "GlassCo Ltd",
       "supplierContact": "+1 555 123 4567",
       "date": "2025-11-22",
       "expectedDate": "2025-11-22",
-      "status": "completed",
+      "status": "done",
       "items": [
-        { 
-          "productId": "prod001", 
-          "productName": "12mm Tempered Glass", 
-          "quantity": 50, 
+        {
+          "productId": "prod001",
+          "productName": "12mm Tempered Glass",
+          "quantity": 50,
           "unitPrice": 45.50,
           "totalPrice": 2275.00
         }
@@ -249,19 +292,19 @@
     },
     {
       "id": "rec002",
-      "receiptNumber": "RCP-2025-002",
+      "receiptNumber": "WH/IN/0002",
       "warehouse": "Main Warehouse",
       "warehouseId": "wh001",
-      "supplier": "GlassCo Ltd",
+      "supplier": "Azure Interior",
       "supplierContact": "+1 555 123 4567",
-      "date": "2025-11-20",
+      "date": "2025-11-25",
       "expectedDate": "2025-11-25",
-      "status": "pending",
+      "status": "ready",
       "items": [
-        { 
-          "productId": "prod002", 
-          "productName": "8mm Clear Glass", 
-          "quantity": 100, 
+        {
+          "productId": "prod002",
+          "productName": "8mm Clear Glass",
+          "quantity": 100,
           "unitPrice": 28.00,
           "totalPrice": 2800.00
         }
@@ -269,23 +312,23 @@
       "totalValue": 2800.00,
       "receivedBy": "usr002",
       "receivedByName": "Manager Jane",
-      "notes": "Awaiting delivery confirmation"
+      "notes": "Ready for receiving"
     },
     {
       "id": "rec003",
-      "receiptNumber": "RCP-2025-003",
+      "receiptNumber": "WH/IN/0003",
       "warehouse": "Secondary Warehouse",
       "warehouseId": "wh002",
       "supplier": "Hardware Plus",
       "supplierContact": "+1 555 234 5678",
       "date": "2025-11-21",
       "expectedDate": "2025-11-21",
-      "status": "completed",
+      "status": "draft",
       "items": [
-        { 
-          "productId": "prod003", 
-          "productName": "Mounting Brackets", 
-          "quantity": 200, 
+        {
+          "productId": "prod003",
+          "productName": "Mounting Brackets",
+          "quantity": 200,
           "unitPrice": 2.50,
           "totalPrice": 500.00
         }
@@ -293,13 +336,37 @@
       "totalValue": 500.00,
       "receivedBy": "usr003",
       "receivedByName": "Staff John",
-      "notes": "Partial delivery, remaining 100 units to arrive next week"
+      "notes": "Draft receipt, awaiting approval"
+    },
+    {
+      "id": "rec004",
+      "receiptNumber": "WH/IN/0004",
+      "warehouse": "Main Warehouse",
+      "warehouseId": "wh001",
+      "supplier": "Gemini Furniture",
+      "supplierContact": "+1 555 345 6789",
+      "date": "2025-11-23",
+      "expectedDate": "2025-11-23",
+      "status": "ready",
+      "items": [
+        {
+          "productId": "prod004",
+          "productName": "Glass Cutter Pro",
+          "quantity": 15,
+          "unitPrice": 125.00,
+          "totalPrice": 1875.00
+        }
+      ],
+      "totalValue": 1875.00,
+      "receivedBy": "usr002",
+      "receivedByName": "Manager Jane",
+      "notes": "Ready for processing"
     }
   ],
   "deliveries": [
     {
       "id": "del001",
-      "deliveryNumber": "DEL-2025-001",
+      "deliveryNumber": "WH/OUT/0001",
       "warehouse": "Main Warehouse",
       "warehouseId": "wh001",
       "customer": "ABC Construction",
@@ -307,11 +374,11 @@
       "deliveryAddress": "789 Construction Site Rd, City, State 12345",
       "date": "2025-11-21",
       "scheduledDate": "2025-11-21",
-      "status": "dispatched",
+      "status": "done",
       "items": [
-        { 
-          "productId": "prod001", 
-          "productName": "12mm Tempered Glass", 
+        {
+          "productId": "prod001",
+          "productName": "12mm Tempered Glass",
           "quantity": 10,
           "unitPrice": 45.50,
           "totalPrice": 455.00
@@ -325,7 +392,7 @@
     },
     {
       "id": "del002",
-      "deliveryNumber": "DEL-2025-002",
+      "deliveryNumber": "WH/OUT/0002",
       "warehouse": "Secondary Warehouse",
       "warehouseId": "wh002",
       "customer": "XYZ Builders",
@@ -333,11 +400,11 @@
       "deliveryAddress": "456 Builder Ave, City, State 12345",
       "date": "2025-11-22",
       "scheduledDate": "2025-11-22",
-      "status": "pending",
+      "status": "ready",
       "items": [
-        { 
-          "productId": "prod004", 
-          "productName": "Glass Cutter Pro", 
+        {
+          "productId": "prod004",
+          "productName": "Glass Cutter Pro",
           "quantity": 5,
           "unitPrice": 125.00,
           "totalPrice": 625.00
@@ -348,44 +415,78 @@
       "deliveredByName": "Staff John",
       "trackingNumber": "TRK-2025-002",
       "notes": "Scheduled for afternoon delivery"
+    },
+    {
+      "id": "del003",
+      "deliveryNumber": "WH/OUT/0003",
+      "warehouse": "Main Warehouse",
+      "warehouseId": "wh001",
+      "customer": "Modern Homes Inc",
+      "customerContact": "+1 555 111 2222",
+      "deliveryAddress": "101 Modern Way, City, State 12345",
+      "date": "2025-11-25",
+      "scheduledDate": "2025-11-25",
+      "status": "waiting",
+      "items": [
+        {
+          "productId": "prod002",
+          "productName": "8mm Clear Glass",
+          "quantity": 200,
+          "unitPrice": 28.00,
+          "totalPrice": 5600.00
+        }
+      ],
+      "totalValue": 5600.00,
+      "deliveredBy": "usr002",
+      "deliveredByName": "Manager Jane",
+      "trackingNumber": "",
+      "notes": "Waiting for stock replenishment"
     }
   ],
-  "stockMoves": [
+  "transfers": [
     {
-      "id": "move001",
-      "moveNumber": "TRF-2025-001",
-      "type": "transfer",
+      "id": "trf001",
+      "transferNumber": "WH/INT/0001",
       "fromWarehouse": "Main Warehouse",
       "fromWarehouseId": "wh001",
       "toWarehouse": "Secondary Warehouse",
       "toWarehouseId": "wh002",
-      "fromLocation": "A1",
-      "toLocation": "C1",
-      "product": "prod001",
-      "productName": "12mm Tempered Glass",
-      "quantity": 10,
       "date": "2025-11-20",
-      "status": "completed",
-      "initiatedBy": "usr002",
-      "initiatedByName": "Manager Jane",
-      "reason": "Stock rebalancing between warehouses",
-      "notes": "Transfer completed successfully"
+      "scheduledDate": "2025-11-20",
+      "status": "done",
+      "items": [
+        {
+          "productId": "prod001",
+          "productName": "12mm Tempered Glass",
+          "quantity": 10
+        }
+      ],
+      "responsible": "Manager Jane",
+      "notes": "Stock rebalancing"
     },
     {
-      "id": "move002",
-      "moveNumber": "ADJ-2025-001",
-      "type": "adjustment",
-      "warehouse": "Main Warehouse",
-      "warehouseId": "wh001",
-      "location": "A2",
-      "product": "prod002",
-      "productName": "8mm Clear Glass",
-      "quantity": -5,
-      "date": "2025-11-19",
-      "status": "completed",
-      "initiatedBy": "usr002",
-      "initiatedByName": "Manager Jane",
-      "reason": "Damaged goods",
+      "id": "trf002",
+      "transferNumber": "WH/INT/0002",
+      "fromWarehouse": "Secondary Warehouse",
+      "fromWarehouseId": "wh002",
+      "toWarehouse": "Main Warehouse",
+      "toWarehouseId": "wh001",
+      "date": "2025-11-22",
+      "scheduledDate": "2025-11-22",
+      "status": "draft",
+      "items": [
+        {
+          "productId": "prod004",
+          "productName": "Glass Cutter Pro",
+          "quantity": 5
+        }
+      ],
+      "responsible": "Staff John",
+      "notes": "Urgent requirement at Main WH"
+    }
+  ],
+  "stockMoves": [
+    {
       "notes": "5 sheets found damaged during inspection, written off"
     },
     {
@@ -434,7 +535,7 @@
       "title": "Add Product",
       "description": "Add new product to inventory",
       "icon": "plus",
-      "link": "/dashboard/products/new",
+      "link": "/products",
       "color": "accent"
     },
     {
@@ -442,7 +543,7 @@
       "title": "Create Receipt",
       "description": "Record incoming stock",
       "icon": "package",
-      "link": "/dashboard/operations/receipts/new",
+      "link": "/operations/receipts",
       "color": "success"
     },
     {
@@ -450,7 +551,7 @@
       "title": "New Delivery",
       "description": "Schedule outgoing delivery",
       "icon": "truck",
-      "link": "/dashboard/operations/deliveries/new",
+      "link": "/operations/deliveries",
       "color": "info"
     },
     {
@@ -458,7 +559,7 @@
       "title": "Transfer Stock",
       "description": "Move items between warehouses",
       "icon": "transfer",
-      "link": "/dashboard/stock-moves/new",
+      "link": "/operations/transfers",
       "color": "warning"
     }
   ]

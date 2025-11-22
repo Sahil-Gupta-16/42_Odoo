@@ -54,6 +54,12 @@ module.exports = {
           light: 'var(--border-light)',
           medium: 'var(--border-medium)',
         },
+        purple: 'var(--purple)',
+        blue: 'var(--blue)',
+        indigo: 'var(--indigo)',
+        pink: 'var(--pink)',
+        orange: 'var(--orange)',
+        teal: 'var(--teal)',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
