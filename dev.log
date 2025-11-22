@@ -1,0 +1,12 @@
+$ next dev
+ ⚠ Port 3000 is in use by an unknown process, using available port 3001 instead.
+   ▲ Next.js 16.0.3 (Turbopack)
+   - Local:         http://localhost:3001
+   - Network:       http://192.168.0.182:3001
+
+ ✓ Starting...
+ ✓ Ready in 826ms
+ ⚠ Cross origin request detected from 192.168.0.182 to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ GET /dashboard 404 in 2.2s (compile: 2.1s, render: 145ms)
+ GET /dashboard 404 in 51ms (compile: 6ms, render: 45ms)
