@@ -1,27 +1,7 @@
-/**
- * Settings Page - Application Configuration
- * 
- * Purpose:
- * - Manage user preferences
- * - Configure app appearance
- * - Control notifications
- * - Security settings
- * - System preferences
- * 
- * Features:
- * - Dark/Light mode toggle
- * - Animation controls
- * - Sound preferences
- * - Account settings
- * - Data management
- * - Export/Import options
- */
-
 'use client';
 
 import { motion } from 'framer-motion';
 import { 
-  Settings as SettingsIcon, 
   Moon, 
   Sun, 
   Bell, 
@@ -32,23 +12,31 @@ import {
   Trash2,
   Save,
   Monitor,
-  Volume2,
-  Zap
+  Warehouse,
+  MapPin,
+  Plus,
+  Edit,
+  ExternalLink,
+  ArrowRight
 } from 'lucide-react';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useUIStore } from '@/store/useUIStore';
 import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
 import Tabs from '@/components/ui/Tabs';
+import dummyData from '@/data/dummy.json';
 
 export default function SettingsPage() {
-  const { theme, toggleTheme, preferences, setPreference, rollingTextSpeed, setRollingTextSpeed } = useUIStore();
+  const router = useRouter();
+  const { theme, toggleTheme, preferences, setPreference, rollingTextSpeed, setRollingTextSpeed, addNotification } = useUIStore();
   const [isSaving, setIsSaving] = useState(false);
 
   const handleSave = () => {
     setIsSaving(true);
     setTimeout(() => {
       setIsSaving(false);
+      addNotification('success', 'Settings saved successfully!');
     }, 1000);
   };
 
@@ -58,7 +46,6 @@ export default function SettingsPage() {
       icon: <Monitor className="w-4 h-4" />,
       content: (
         <div className="space-y-6">
-          {/* Theme Setting */}
           <div className="glass-effect rounded-lg p-6 border border-border dark:border-border">
             <div className="flex items-center gap-3 mb-4">
               {theme === 'light' ? (
@@ -205,6 +192,107 @@ export default function SettingsPage() {
       ),
     },
     {
+      label: 'Warehouses',
+      icon: <Warehouse className="w-4 h-4" />,
+      content: (
+        <div className="space-y-4">
+          <div className="flex justify-between items-center mb-4">
+            <div>
+              <h3 className="text-lg font-semibold text-primary dark:text-primary">Warehouse Management</h3>
+              <p className="text-sm text-text-secondary dark:text-text-secondary">
+                Quick overview of your warehouses • Click to manage
+              </p>
+            </div>
+            <div className="flex gap-2">
+              <Button 
+                variant="ghost" 
+                onClick={() => router.push('/dashboard/warehouses')}
+              >
+                <ExternalLink className="w-4 h-4" />
+                View All
+              </Button>
+              <Button onClick={() => router.push('/dashboard/warehouses/new')}>
+                <Plus className="w-4 h-4" />
+                Add Warehouse
+              </Button>
+            </div>
+          </div>
+
+          <div className="space-y-3">
+            {dummyData.warehouses?.map((warehouse: any) => (
+              <div
+                key={warehouse.id}
+                onClick={() => router.push(`/dashboard/warehouses/${warehouse.id}`)}
+                className="glass-effect rounded-lg p-5 border border-border dark:border-border hover:border-accent dark:hover:border-accent transition-all cursor-pointer group"
+              >
+                <div className="flex items-start justify-between">
+                  <div className="flex items-start gap-4 flex-1">
+                    <div className="p-3 rounded-lg bg-accent/10 group-hover:bg-accent/20 transition-colors">
+                      <Warehouse className="w-6 h-6 text-accent" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h4 className="font-semibold text-primary dark:text-primary group-hover:text-accent transition-colors">
+                          {warehouse.name}
+                        </h4>
+                        <ArrowRight className="w-4 h-4 text-text-tertiary opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-text-secondary dark:text-text-secondary mb-2">
+                        <MapPin className="w-4 h-4" />
+                        <span>{warehouse.location}</span>
+                      </div>
+                      <div className="flex items-center gap-4 text-sm">
+                        <Badge variant={warehouse.status === 'active' ? 'success' : 'default'}>
+                          {warehouse.status}
+                        </Badge>
+                        <span className="text-text-tertiary dark:text-text-tertiary">
+                          {warehouse.capacity || 'N/A'} capacity
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        router.push(`/dashboard/warehouses/${warehouse.id}/edit`);
+                      }}
+                      className="p-2 rounded-lg hover:bg-accent/10 transition-colors"
+                    >
+                      <Edit className="w-4 h-4 text-accent" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {dummyData.warehouses && dummyData.warehouses.length > 0 && (
+            <div className="glass-effect rounded-lg p-4 border border-border dark:border-border">
+              <div className="grid grid-cols-3 gap-4 text-center">
+                <div>
+                  <p className="text-2xl font-bold text-accent">{dummyData.warehouses.length}</p>
+                  <p className="text-xs text-text-secondary dark:text-text-secondary">Total Warehouses</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-success">
+                    {dummyData.warehouses.filter((w: any) => w.status === 'active').length}
+                  </p>
+                  <p className="text-xs text-text-secondary dark:text-text-secondary">Active</p>
+                </div>
+                <div>
+                  <p className="text-2xl font-bold text-text-primary dark:text-text-primary">
+                    {dummyData.warehouses.reduce((sum: number, w: any) => sum + (parseInt(w.capacity) || 0), 0)}
+                  </p>
+                  <p className="text-xs text-text-secondary dark:text-text-secondary">Total Capacity</p>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      ),
+    },
+    {
       label: 'Security',
       icon: <Lock className="w-4 h-4" />,
       content: (
@@ -298,7 +386,6 @@ export default function SettingsPage() {
 
   return (
     <div className="w-full max-w-full space-y-6">
-      {/* Page Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -318,7 +405,6 @@ export default function SettingsPage() {
         </Button>
       </motion.div>
 
-      {/* Settings Tabs */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

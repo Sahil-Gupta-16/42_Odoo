@@ -41,7 +41,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-[1020] glass-effect border-b border-border dark:border-border">
+    <header className="fixed top-0 left-0 right-0 z-[1020] glass-effect border-b border-border dark:border-border">
       <div className="flex items-center justify-between h-16 px-6">
         {/* Left Section */}
         <div className="flex items-center gap-4">

@@ -35,18 +35,22 @@ export default function DashboardLayout({
   }, [theme]);
 
   return (
-    <div className="min-h-screen bg-background dark:bg-background transition-colors duration-300 overflow-x-hidden">
+    <div className="min-h-screen bg-background dark:bg-background transition-colors duration-300">
+      {/* Fixed Header */}
       <Header />
       
-      <div className="flex relative w-full">
+      {/* Main Layout Container */}
+      <div className="pt-16 flex relative w-full">
+        {/* Sidebar */}
         <Sidebar />
         
+        {/* Main Content Area */}
         <main
-          className={`flex-1 w-full min-h-[calc(100vh-4rem)] transition-all duration-300 ${
-            sidebarOpen ? 'pl-0 md:pl-[280px]' : 'pl-0 md:pl-[80px]'
+          className={`flex-1 w-full min-h-[calc(100vh-4rem)] transition-all duration-300 ease-in-out ${
+            sidebarOpen ? 'md:ml-[280px]' : 'md:ml-[80px]'
           }`}
         >
-          <div className="w-full max-w-full p-4 md:p-6 overflow-x-hidden">
+          <div className="w-full max-w-full p-4 md:p-6">
             <AnimatePresence mode="wait">
               <motion.div
                 key={pathname}
@@ -63,6 +67,7 @@ export default function DashboardLayout({
         </main>
       </div>
 
+      {/* Notification Toast */}
       <NotificationToast />
     </div>
   );
