@@ -1,0 +1,68 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+.local/
+pip-wheel-metadata/
+
+# Odoo / database / filestore
+filestore/
+addons/*/filestore/
+*.db
+*.sqlite3
+*.dump
+
+# Build / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Logs / temp / cache
+*.log
+logs/
+tmp/
+cache/
+*.pid
+
+# Node / frontend
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn.lock
+
+# IDEs / editors / OS
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Test / coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Secrets / local configs
+.env
+.env.*
+secrets.yml
+credentials.json
+odoo.conf
+odoo-bin
+
+# Misc
+*.pyc
+*.pyo
+*.pyd
+*.bak
+*.backup

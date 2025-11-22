@@ -1,0 +1,248 @@
+{
+  "appName": "StockMaster",
+  "labels": {
+    "dashboard": "Inventory Dashboard",
+    "login": "Login to StockMaster",
+    "signup": "Create Your Account",
+    "resetPassword": "Reset Password",
+    "warehouse": "Warehouses",
+    "products": "Products",
+    "receipts": "Receipts",
+    "deliveries": "Deliveries",
+    "transfers": "Stock Transfers",
+    "history": "Transaction History",
+    "settings": "Settings",
+    "profile": "My Profile",
+    "categories": "Categories",
+    "lowStock": "Low Stock Alert",
+    "outOfStock": "Out of Stock",
+    "logout": "Logout"
+  },
+  "users": [
+    {
+      "id": "usr001",
+      "name": "Admin User",
+      "email": "admin@stockmaster.com",
+      "password": "admin123",
+      "role": "admin",
+      "warehouse": "Main Warehouse",
+      "avatar": "/avatars/admin.png"
+    },
+    {
+      "id": "usr002",
+      "name": "Manager Jane",
+      "email": "manager@stockmaster.com",
+      "password": "manager123",
+      "role": "manager",
+      "warehouse": "Main Warehouse"
+    },
+    {
+      "id": "usr003",
+      "name": "Staff John",
+      "email": "staff@stockmaster.com",
+      "password": "staff123",
+      "role": "staff",
+      "warehouse": "Secondary Warehouse"
+    }
+  ],
+  "warehouses": [
+    {
+      "id": "wh001",
+      "name": "Main Warehouse",
+      "location": "Building A, Floor 1",
+      "capacity": 5000,
+      "currentStock": 3250,
+      "zones": ["A1", "A2", "A3", "B1", "B2"]
+    },
+    {
+      "id": "wh002",
+      "name": "Secondary Warehouse",
+      "location": "Building B, Floor 2",
+      "capacity": 3000,
+      "currentStock": 1800,
+      "zones": ["C1", "C2", "D1"]
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat001",
+      "name": "Glass Products",
+      "description": "Tempered and regular glass sheets",
+      "productCount": 25
+    },
+    {
+      "id": "cat002",
+      "name": "Hardware",
+      "description": "Fasteners, brackets, and mounting hardware",
+      "productCount": 150
+    },
+    {
+      "id": "cat003",
+      "name": "Tools",
+      "description": "Hand tools and power tools",
+      "productCount": 45
+    }
+  ],
+  "products": [
+    {
+      "id": "prod001",
+      "name": "12mm Tempered Glass",
+      "sku": "TG-12MM-001",
+      "category": "Glass Products",
+      "warehouse": "Main Warehouse",
+      "location": "A1",
+      "stock": 120,
+      "minStockLevel": 20,
+      "maxStockLevel": 200,
+      "unit": "sheets",
+      "unitPrice": 45.50,
+      "supplier": "GlassCo Ltd",
+      "lastRestocked": "2025-11-20"
+    },
+    {
+      "id": "prod002",
+      "name": "8mm Clear Glass",
+      "sku": "CG-8MM-002",
+      "category": "Glass Products",
+      "warehouse": "Main Warehouse",
+      "location": "A2",
+      "stock": 15,
+      "minStockLevel": 20,
+      "maxStockLevel": 150,
+      "unit": "sheets",
+      "unitPrice": 28.00,
+      "supplier": "GlassCo Ltd",
+      "lastRestocked": "2025-11-18"
+    },
+    {
+      "id": "prod003",
+      "name": "Mounting Brackets",
+      "sku": "HW-BRK-003",
+      "category": "Hardware",
+      "warehouse": "Secondary Warehouse",
+      "location": "C1",
+      "stock": 0,
+      "minStockLevel": 50,
+      "maxStockLevel": 500,
+      "unit": "pieces",
+      "unitPrice": 2.50,
+      "supplier": "Hardware Plus",
+      "lastRestocked": "2025-11-15"
+    },
+    {
+      "id": "prod004",
+      "name": "Glass Cutter Pro",
+      "sku": "TL-GC-004",
+      "category": "Tools",
+      "warehouse": "Main Warehouse",
+      "location": "B1",
+      "stock": 35,
+      "minStockLevel": 10,
+      "maxStockLevel": 50,
+      "unit": "pieces",
+      "unitPrice": 125.00,
+      "supplier": "ToolMasters Inc",
+      "lastRestocked": "2025-11-22"
+    }
+  ],
+  "receipts": [
+    {
+      "id": "rec001",
+      "receiptNumber": "RCP-2025-001",
+      "warehouse": "Main Warehouse",
+      "supplier": "GlassCo Ltd",
+      "date": "2025-11-22",
+      "status": "completed",
+      "items": [
+        { "productId": "prod001", "productName": "12mm Tempered Glass", "quantity": 50, "unitPrice": 45.50 }
+      ],
+      "totalValue": 2275.00,
+      "receivedBy": "usr002"
+    },
+    {
+      "id": "rec002",
+      "receiptNumber": "RCP-2025-002",
+      "warehouse": "Main Warehouse",
+      "supplier": "GlassCo Ltd",
+      "date": "2025-11-20",
+      "status": "pending",
+      "items": [
+        { "productId": "prod002", "productName": "8mm Clear Glass", "quantity": 100, "unitPrice": 28.00 }
+      ],
+      "totalValue": 2800.00,
+      "receivedBy": "usr002"
+    }
+  ],
+  "deliveries": [
+    {
+      "id": "del001",
+      "deliveryNumber": "DEL-2025-001",
+      "warehouse": "Main Warehouse",
+      "customer": "ABC Construction",
+      "date": "2025-11-21",
+      "status": "dispatched",
+      "items": [
+        { "productId": "prod001", "productName": "12mm Tempered Glass", "quantity": 10 }
+      ],
+      "deliveredBy": "usr003"
+    },
+    {
+      "id": "del002",
+      "deliveryNumber": "DEL-2025-002",
+      "warehouse": "Secondary Warehouse",
+      "customer": "XYZ Builders",
+      "date": "2025-11-22",
+      "status": "pending",
+      "items": [
+        { "productId": "prod004", "productName": "Glass Cutter Pro", "quantity": 5 }
+      ],
+      "deliveredBy": "usr003"
+    }
+  ],
+  "stockMoves": [
+    {
+      "id": "move001",
+      "moveNumber": "TRF-2025-001",
+      "type": "transfer",
+      "fromWarehouse": "Main Warehouse",
+      "toWarehouse": "Secondary Warehouse",
+      "fromLocation": "A1",
+      "toLocation": "C1",
+      "product": "prod001",
+      "productName": "12mm Tempered Glass",
+      "quantity": 10,
+      "date": "2025-11-20",
+      "status": "completed",
+      "initiatedBy": "usr002"
+    },
+    {
+      "id": "move002",
+      "moveNumber": "ADJ-2025-001",
+      "type": "adjustment",
+      "warehouse": "Main Warehouse",
+      "location": "A2",
+      "product": "prod002",
+      "productName": "8mm Clear Glass",
+      "quantity": -5,
+      "reason": "Damaged goods",
+      "date": "2025-11-19",
+      "status": "completed",
+      "initiatedBy": "usr002"
+    }
+  ],
+  "kpi": {
+    "totalProducts": 220,
+    "lowStock": 1,
+    "outOfStock": 1,
+    "pendingReceipts": 1,
+    "pendingDeliveries": 1,
+    "totalValue": 125000.00,
+    "warehouseUtilization": 65
+  },
+  "rollingTextMessages": [
+    "⚠️ Low stock alert: 8mm Clear Glass (15 sheets remaining)",
+    "✅ Recent delivery: 50 sheets of 12mm Tempered Glass received",
+    "🚚 Pending delivery to ABC Construction scheduled for today",
+    "📦 2 receipts awaiting validation"
+  ]
+}
