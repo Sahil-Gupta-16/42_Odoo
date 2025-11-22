@@ -1,5 +1,5 @@
 # StockMaster - Inventory Management System
-https://own.vikasrajyadav.com/login
+Deployment link -> https://own.vikasrajyadav.com/login
 
 A powerful, full-stack Inventory Management System with real-time dashboard, OTP authentication, multi-warehouse support, and offline capabilities.
 
